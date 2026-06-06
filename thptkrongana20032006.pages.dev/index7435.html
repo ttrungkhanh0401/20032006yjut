@@ -41,7 +41,6 @@
     </div>
     <ul class="nav-links">
       <li><a href="#about">Giới Thiệu</a></li>
-      <li><a href="#gallery">Ký Ức</a></li>
       <li><a href="#schedule">Lịch Trình</a></li>
       <li><a href="#cost">Kinh Phí</a></li>
       <li><a href="#sponsors">Tài Trợ</a></li>
@@ -56,7 +55,6 @@
   <!-- MOBILE DRAWER -->
   <nav class="nav-drawer" id="drawer">
     <a href="#about" onclick="closeD()">Giới Thiệu</a>
-    <a href="#gallery" onclick="closeD()">Ký Ức</a>
     <a href="#schedule" onclick="closeD()">Lịch Trình</a>
     <a href="#cost" onclick="closeD()">Kinh Phí</a>
     <a href="#sponsors" onclick="closeD()">Tài Trợ</a>
@@ -163,55 +161,6 @@
         <div class="sb-sm">Thầy cô & Khách mời</div>
       </div>
     </div>
-  </div>
-
-  <!-- GALLERY - CINEMATIC -->
-  <section class="gl-sec" id="gallery">
-    <!-- Header -->
-    <div class="cinema-top rev">
-      <div class="sl sl-center">Ký Ức • Phóng Chiếu</div>
-      <h2 class="st">Những Khoảnh Khắc<br><span class="st-subtitle-sm">Hai
-          Mươi Năm Cất Giữ</span></h2>
-      <p>M&#7895;i t&#7845;m &#7843;nh l&agrave; m&#7897;t th&#432;&#7899;c phim &mdash; m&#7897;t kho&#7843;nh
-        kh&#7855;c thanh xu&acirc;n ch&#7901; &#273;&#432;&#7907;c s&#7889;ng l&#7841;i.</p>
-    </div>
-
-    <!-- Cinema Screen -->
-    <div class="cinema-wrap">
-      <div class="cinema-screen" id="cinemaScreen">
-
-        <!-- Dynamic slides will be injected here by main.js -->
-
-        <!-- Progress & Controls -->
-        <div class="cinema-progress">
-          <div class="cinema-progress-fill" id="cinemaFill"></div>
-        </div>
-        <button class="slide-nav slide-prev" id="slidePrev" aria-label="Tr&#432;&#7899;c">&#8592;</button>
-        <button class="slide-nav slide-next" id="slideNext" aria-label="Ti&#7871;p theo">&#8594;</button>
-        <div class="slide-dots" id="slideDots"></div>
-      </div><!-- /cinema-screen -->
-    </div><!-- /cinema-wrap -->
-
-    <!-- Film Strip -->
-    <div class="filmstrip-outer">
-      <div class="filmstrip-label">&#9632; Phim K&#253; &Uacute;c &mdash; 2003 &bull; 2006 &#9632;</div>
-      <div class="filmstrip-reel">
-        <div class="filmstrip-scroll">
-          <div class="filmstrip" id="filmstrip">
-            <!-- Items injected by JS -->
-          </div>
-        </div>
-      </div>
-      <p class="cinema-hint">📷 Có ảnh kỷ niệm muốn chia sẻ? Gửi cho
-        BTC để đưa lên màn ảnh!</p>
-    </div>
-  </section>
-
-  <!-- LIGHTBOX -->
-  <div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Xem ảnh">
-    <button class="lb-close" id="lbClose" aria-label="Đóng">&times;</button>
-    <img id="lbImg" src="#" alt="">
-    <div class="lb-cap" id="lbCap"></div>
   </div>
 
   <!-- TRIBUTE TO TEACHERS -->
@@ -363,22 +312,9 @@
           // ║  amount : số tiền tài trợ                                ║
           // ╚══════════════════════════════════════════════════════════╝
           const sponsors = [
-{img:'sp_dong.jpg',name:'Nguyễn Thị Thu Đông',role:'',org:'Cựu học sinh lớp 12I',amount:'30.000.000đ'},
-{img:'sp_hoa.jpg',name:'Trần Thị Như Hoa',role:'',org:'Cựu học sinh lớp 12H',amount:'5.000.000đ'},
-{img:'le-thu-huong.jpg',name:'Lê Thu Hường',role:'',org:'Cựu học sinh lớp 12I',amount:'2.100.000đ'},
-{img:'nguyen-van-thuong.jpg',name:'Nguyễn Văn Thường',role:'',org:'Cựu học sinh lớp 12H',amount:'2.000.000đ'},
-{img:'hoang-anh-dai.jpg',name:'Hoàng Anh Đài',role:'',org:'Cựu học sinh lớp 12I',amount:'1.000.000đ'},
-{img:'',name:'Bạn Giấu Tên',role:'',org:'Cựu học sinh lớp 12C',amount:'1.000.000đ'},
-{img:'dao-duc-hiep.jpg',name:'Đào Đức Hiệp',role:'',org:'Cựu học sinh lớp 12A',amount:'5.000.000đ'},
-{img:'dinh-van-hoang.jpg',name:'Đinh Văn Hoàng',role:'',org:'Cựu học sinh lớp 12A',amount:'10.000.000đ'},
-{img:'tapthe12k.jpg',name:'Tập thể lớp 12K',role:'',org:'Lớp 12K',amount:'2.000.000đ'},
-{img:'pham-thi-thanh-huong.jpg',name:'Phạm Thị Thanh Hương',role:'',org:'Cựu học sinh lớp 12J',amount:'3.000.000đ'},
-{img:'Nguyễn Thị Thanh Thuý 12J  1 triệu.jpg',name:'Nguyễn Thị Thanh Thuý',role:'',org:'Cựu học sinh lớp 12J',amount:'1.000.000đ'},
-{img:'Vũ Văn Bằng 12J _1 tr.jpg',name:'Vũ Văn Bằng',role:'',org:'Cựu học sinh lớp 12J',amount:'1.000.000đ'},
-{img:'Hàn Thanh Phương 12J ủng hộ 999k.jpg',name:'Hàn Thanh Phương',role:'',org:'Cựu học sinh lớp 12J',amount:'999.000đ'},
-{img:'Ngô Văn Tặng lớp 12D 1 triệu đồng.jpg',name:'Ngô Văn Tặng',role:'',org:'Cựu học sinh lớp 12D',amount:'1.000.000đ'},
-{img:'Phạm Văn Tấn 2tr lớp 12B.jpg',name:'Phạm Văn Tấn',role:'',org:'Cựu học sinh lớp 12B',amount:'2.000.000đ'},
-{img:'Phạm Thế Sơn 3tr lớp 12B.jpg',name:'Phạm Thế Sơn',role:'',org:'Cựu học sinh lớp 12B',amount:'3.000.000đ'}
+{img:'sp_dong.jpg',name:'Mạnh thường quân 1',role:'',org:'Cựu học sinh lớp 12...',amount:'30.000.000đ'},
+{img:'sp_hoa.jpg',name:'Mạnh thường quân 2',role:'',org:'Cựu học sinh lớp 12...',amount:'5.000.000đ'},
+{img:'le-thu-huong.jpg',name:'Mạnh thường quân 3',role:'',org:'Cựu học sinh lớp 12...',amount:'2.100.000đ'},
 ];
           function imgSrc(filename) { return filename ? '/images/' + encodeURIComponent(filename) : ''; }
           document.getElementById('sponsors-grid').innerHTML = sponsors.map((sp, idx) => {
@@ -426,86 +362,21 @@
             {
               img: 'dinh-van-hoang.jpg',
               classId: '12A',
-              name: 'Đinh Văn Hoàng',
+              name: 'Đại diện lớp 12...',
               role: 'Đại Diện Lớp 12A',
-              phone: '0918490159',
-              zalo: '0918490159'
+              phone: '09xxxxxxx',
+              zalo: '09xxxxxxxxx'
             },
             {
               img: 'nguyen-xuan-hoan.jpg',
               classId: '12B',
-              name: 'Nguyễn Xuân Hoàn',
+              name: 'Đại diện lớp...',
               role: 'Đại Diện Lớp 12B',
-              phone: '0985555237',
-              zalo: '0985555237',
+              phone: '09xxxxx',
+              zalo: '09xxxxxx',
               pos: 'center 20%'
             },
-            {
-              img: 'le-the-phuong.jpg',
-              classId: '12C',
-              name: 'Lê Thế Phương',
-              role: 'Đại Diện Lớp 12C',
-              phone: '0972070555',
-              zalo: '0972070555'
-            },
-            {
-              img: 'nguyen-vu-tien.jpeg',
-              classId: '12D',
-              name: 'Nguyễn Vũ Tiến',
-              role: 'Đại Diện Lớp 12D',
-              phone: '0975193757',
-              zalo: '0975193757'
-            },
-            {
-              img: 'Phùng Thị Thương Thương 12E.JPG',
-              classId: '12E',
-              name: 'Phùng Thị Thương Thương',
-              role: 'Đại Diện Lớp 12E',
-              phone: '0942781486',
-              zalo: '0942781486'
-            },
-            {
-              img: 'TRƯƠNG QUANG VƯƠNG - 12 G.jpg',
-              classId: '12G',
-              name: 'Trương Quang Vương',
-              role: 'Đại Diện Lớp 12G',
-              phone: '0967393268',
-              zalo: '0967393268'
-            },
-            {
-              img: 'rep_nga.jpg',
-              classId: '12H',
-              name: 'Hoàng Thanh Nga',
-              role: 'Đại Diện Lớp 12H',
-              phone: '0976765273',
-              zalo: '0976765273'
-            },
-            {
-              img: 'Hồ_Hào_12I.jpg',
-              classId: '12I',
-              name: 'HỒ THỊ THU HÀO',
-              role: 'Đại Diện Lớp 12I',
-              phone: '0384027224',
-              zalo: '0384027224'
-            },
-            {
-              img: 'rep_nini.jpg',
-              classId: '12J',
-              name: 'Hồ Thị Ni Ni',
-              role: 'Đại Diện Lớp 12J',
-              phone: '0976825101',
-              zalo: '0976825101'
-            }
-
-            , {
-              img: 'Vũ Gia Quý 12K.jpg',
-              classId: '12K',
-              name: 'Vũ Gia Quý',
-              role: 'Đại Diện Lớp 12K',
-              phone: '0975744035',
-              zalo: '0975744035'
-            }
-
+            
           ];
 
           // Hàm tự động encode tên file (không cần chỉnh sửa)
@@ -852,40 +723,8 @@
         </div>
       </div>
 
-      <!-- Custom Guestbook UI -->
-      <div
-        style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px;margin-bottom:24px">
-        <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap">
-          <input type="text" id="gbName" maxlength="50" placeholder="Tên và Lớp (VD: Tuấn 12A)..."
-            style="flex:1;min-width:200px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,.3);padding:14px;border-radius:8px;color:#fff;font-family:inherit;font-size:1rem;outline:none">
 
-          <select id="gbType"
-            style="background:rgba(0,0,0,0.5);border:1px solid rgba(212,168,67,.3);padding:14px;border-radius:8px;color:var(--gold-light);font-family:inherit;font-size:.95rem;outline:none;cursor:pointer;min-width:180px">
-            <option value="normal">📜 Lưu Bút Kỷ Niệm</option>
-            <option value="missing">🔍 Tìm Người Xưa</option>
-            <option value="secret">💌 Confession Ẩn Danh</option>
-          </select>
-
-          <button id="gbSubmit"
-            style="background:linear-gradient(135deg,#D4A843,#C4962A);color:var(--navy);font-weight:700;padding:14px 28px;border-radius:8px;transition:0.2s;border:none;cursor:pointer;white-space:nowrap">Gửi
-            Đi</button>
-        </div>
-        <textarea id="gbMsg" maxlength="500" placeholder="Viết dòng tâm sự của bạn vào đây (tối đa 500 ký tự)..."
-          rows="3"
-          style="width:100%;resize:none;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,.3);padding:14px;border-radius:8px;color:#fff;font-family:inherit;font-size:1rem;outline:none"
-          oninput="document.getElementById('gbCount').textContent = this.value.length + '/500'"></textarea>
-        <div id="gbCount" style="text-align: right; color: var(--tm); font-size: 0.8rem; margin-top: 4px;">0/500</div>
-      </div>
-
-      <!-- Filters -->
-      <div style="display:flex;justify-content:center;gap:10px;margin-bottom:24px;flex-wrap:wrap" id="gbFilters">
-        <button class="gb-flt active" data-filter="all">Trạm Ký Ức</button>
-        <button class="gb-flt" data-filter="normal">📜 Lưu Bút</button>
-        <button class="gb-flt" data-filter="missing">🔍 Tìm Người</button>
-        <button class="gb-flt" data-filter="secret">💌 Ẩn Danh</button>
-      </div>
-
-      <!-- Comments List (Corkboard) -->
+       <!-- Comments List (Corkboard) -->
       <div id="gbList"
         style="display:flex;flex-wrap:wrap;justify-content:center;gap:24px;max-height:600px;overflow-y:auto;padding:36px;background:rgba(0,0,0,0.15) url('data:image/svg+xml,%3Csvg width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Ccircle cx=%222%22 cy=%222%22 r=%221.5%22 fill=%22rgba(255,255,255,0.05)%22/%3E%3C/svg%3E');border-radius:16px;border:1px inset rgba(255,255,255,0.02)">
         <!-- Mặc định trống -->
@@ -975,7 +814,7 @@
       </div>
       <div class="ft-contact-item">
         <span class="ft-contact-icon">📞</span>
-        <a href="tel:0384027224" class="ft-contact-link">Hotline 2: 0384.027.224 (Hồ Thị Thu Hào 12I - Thành viên
+        <a href="tel:09xxxxxxx" class="ft-contact-link">Hotline 2: 09xxxxxxxxxxxxxxx (Bạn xxxxxxxxx 12xxx - Thành viên
           BTC)</a>
       </div>
     </div>
@@ -1068,16 +907,12 @@
           <select id="tkClass"
             style="width:100%;background:rgba(0,0,0,0.4);border:1px solid rgba(212,168,67,0.3);padding:14px;border-radius:8px;color:#fff;font-family:inherit;font-size:1rem;outline:none;cursor:pointer;appearance:none">
             <option value="" disabled selected>Chọn Lớp...</option>
-            <option value="12A">Lớp 12A</option>
-            <option value="12B">Lớp 12B</option>
-            <option value="12C">Lớp 12C</option>
-            <option value="12D">Lớp 12D</option>
-            <option value="12E">Lớp 12E</option>
-            <option value="12G">Lớp 12G</option>
-            <option value="12H">Lớp 12H</option>
-            <option value="12I">Lớp 12I</option>
-            <option value="12J">Lớp 12J</option>
-            <option value="12K">Lớp 12K</option>
+            <option value="12A">Lớp 12A1</option>
+            <option value="12B">Lớp 12A2</option>
+            <option value="12C">Lớp 12A3</option>
+            <option value="12D">Lớp 12A4/option>
+            <option value="12E">Lớp 12A5</option>
+            <option value="12G">Lớp 12...</option>
             <option value="Khách">Khách Mời / Thầy Cô</option>
           </select>
         </div>
