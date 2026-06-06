@@ -457,7 +457,7 @@
               Nhà Tài Trợ</div>
             <div class="fund-amount"
               style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:700;color:var(--white)">
-              <span id="fundCount" data-target="16">16</span>
+              <span id="fundCount" data-target="0">0</span>
             </div>
           </div>
         </div>
@@ -465,8 +465,8 @@
         <script>
           // Bypassing any external script caching by forcing the update inline!
           setTimeout(function () {
-            var vTotal = 70099000;
-            var vCount = 16;
+            var vTotal = 0;
+            var vCount = 0;
             var elTotal = document.getElementById('fundTotal');
             var elCount = document.getElementById('fundCount');
             if (elTotal && elCount) {
