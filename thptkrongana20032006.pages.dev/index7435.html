@@ -368,7 +368,7 @@
               zalo: '0909006607'
             },
             {
-              img: 'nguyen-xuan-hoan.jpg',
+              img: 'favicon.jpg',
               classId: '12A4',
               name: 'Phan Thị Thu Thảo',
               role: 'Đại Diện Lớp 12A4',
@@ -381,7 +381,7 @@
 
           // Hàm tự động encode tên file (không cần chỉnh sửa)
           function imgSrc(filename) {
-            return filename ? '/images/' + encodeURIComponent(filename) : '';
+            return filename ? '/' + encodeURIComponent(filename) : '';
           }
 
           document.getElementById('reps-grid').innerHTML = reps.map(rp => {
