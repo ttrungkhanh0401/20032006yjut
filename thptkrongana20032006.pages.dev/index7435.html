@@ -336,7 +336,7 @@
   </section>
 
   <!-- REPRESENTATIVES -->
-<section class="rep-sec" id="representatives">
+  <section class="rep-sec" id="representatives">
     <div class="container">
       <div class="sp-hdr rev">
         <div class="sl">Ban Liên Lạc</div>
@@ -346,82 +346,84 @@
       </div>
       <div class="rep-g" id="reps-grid"></div>
       <script>
-      (function () {
-        // ╔══════════════════════════════════════════════════════════╗
-        // ║       DANH SÁCH ĐẠI DIỆN LỚP – CHỈNH SỬA Ở ĐÂY         ║
-        // ╠══════════════════════════════════════════════════════════╣
-        // ║  img     : tên file ảnh nằm cùng thư mục với file HTML   ║
-        // ║            (ĐỂ TRỐNG '' nếu chưa có ảnh đại diện)        ║
-        // ║  classId : mã lớp (sẽ hiển thị dạng chữ nếu thiếu ảnh)   ║
-        // ║  name    : họ và tên đầy đủ                              ║
-        // ║  role    : vai trò hiển thị                              ║
-        // ║  phone   : số điện thoại (để '' nếu chưa có)             ║
-        // ║  zalo    : số Zalo (để '' nếu chưa có)                   ║
-        // ╚══════════════════════════════════════════════════════════╝
-        const reps = [
-          {
-            img: 'khanha1.jpg',
-            classId: '12A1',
-            name: 'Trần Trung Khánh',
-            role: 'Đại Diện Lớp 12A1',
-            phone: '0909006607',
-            zalo: '0909006607'
-          },
-          {
-            img: 'thaoa4.jpg',
-            classId: '12A4',
-            name: 'Phan T Thu Thảo',
-            role: 'Đại Diện Lớp 12A4',
-            phone: '0944194347',
-            zalo: '0944194347'
-          },
-          {
-            img: 'bichthao.jpg',
-            classId: '12A3',
-            name: 'Nguyễn T Bích Thảo',
-            role: 'Đại Diện Lớp 12A3',
-            phone: '0987355357',
-            zalo: '0987355357'
-          },
-          {
-            img: 'favicon.jpg',
-            classId: '12A7',
-            name: 'Bạn Hùng',
-            role: 'Đại Diện Lớp 12A7',
-            phone: '0975567114',
-            zalo: '0975567114'
-          },
-            img: 'dunga9.jpg',
-            classId: '12A9',
-            name: 'Bạn Dũng',
-            role: 'Đại Diện Lớp 12A9',
-            phone: '0965571717',
-            zalo: '0965571717'
-          },
-          {
-            img: 'le-the-phu.jpg',
-            classId: '12B1',
-            name: 'Bạn Hải',
-            role: 'Đại Diện Lớp 12B1',
-            phone: '0987434747',
-            zalo: '0987434747'
-          },
-          {
-            img: 'hongb6.jpg', // Thử nghiệm để trống ảnh xem vòng tròn chữ hoạt động
-            classId: '12B6',
-            name: 'Bạn Hồng',
-            role: 'Đại Diện Lớp 12B6',
-            phone: '0375271986',
-            zalo: '0375271986'
-          }
-        ];
+        (function () {
+          // ╔══════════════════════════════════════════════════════════╗
+          // ║       DANH SÁCH ĐẠI DIỆN LỚP – CHỈNH SỬA Ở ĐÂY         ║
+          // ╠══════════════════════════════════════════════════════════╣
+          // ║  img     : tên file ảnh trong thư mục public/images/     ║
+          // ║            (để '' nếu chưa có ảnh)                       ║
+          // ║  classId : mã lớp (VD: '12A..') – hiển thị khi chưa ảnh   ║
+          // ║  name    : họ và tên đầy đủ                              ║
+          // ║  role    : vai trò (VD: 'Đại Diện Lớp 12A..')              ║
+          // ║  phone   : số điện thoại (để '' nếu chưa có)             ║
+          // ║  zalo    : số Zalo (để '' nếu chưa có, thường = phone)   ║
+          // ╚══════════════════════════════════════════════════════════╝
+          const reps = [
+            {
+              img: 'khanha1.jpg',
+              classId: '12A1',
+              name: 'Trần Trung Khánh',
+              role: 'Đại Diện Lớp 12A1',
+              phone: '0909006607',
+              zalo: '0909006607'
+            },
+            {
+              img: 'thaoa4.jpg',
+              classId: '12A4',
+              name: 'Phan Thị Thu Thảo',
+              role: 'Đại Diện Lớp 12A4',
+              phone: '0944194347',
+              zalo: '0944194347',
+              pos: 'center 20%'
+            },
+            {
+              img: 'bichthao.jpg',
+              classId: '12A3',
+              name: 'Nguyễn T Bích Thảo',
+              role: 'Đại Diện Lớp 12A3',
+              phone: '0987355357',
+              zalo: '0987355357',
+              pos: 'center 20%'
+            },
+            {
+              img: 'favicon.jpg',
+              classId: '12A7',
+              name: 'Bạn Hùng',
+              role: 'Đại Diện Lớp 12A7',
+              phone: '0975567114',
+              zalo: '0975567114',
+              pos: 'center 20%'
+            },
+            {
+              img: 'favicon.jpg',
+              classId: '12B1',
+              name: 'Bạn Hải',
+              role: 'Đại Diện Lớp 12B1',
+              phone: '0987434747',
+              zalo: '0987434747',
+              pos: 'center 20%'
+            },
+            {
+              img: 'hongb6.jpg',
+              classId: '12B6',
+              name: 'Bạn Hồng',
+              role: 'Đại Diện Lớp 12B6',
+              phone: '0375271986',
+              zalo: '0375271986',
+              pos: 'center 20%'
+            },
+          ];
 
-                 // Hàm tự động encode tên file (không cần chỉnh sửa)
+          // Hàm tự động encode tên file (không cần chỉnh sửa)
+          function imgSrc(filename) {
+            return filename ? '/images/' + encodeURIComponent(filename) : '';
+          }
+
           document.getElementById('reps-grid').innerHTML = reps.map(rp => {
-          // Chỉ hiển thị hình ảnh nếu có tên file ảnh
-          const imgHtml = rp.img
-            ? `<div class="sp-av-wrap"><img src="${rp.img}" alt="${rp.name}" class="sp-av"></div>`
-            : '<div class="sp-av-placeholder"><span>N/A</span></div>';
+            const pos = rp.pos || 'center center';
+            const imgHtml = rp.img
+              ? `<img src="${imgSrc(rp.img)}" alt="${rp.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:${pos};" onerror="this.style.display='none'">`
+              : '';
             // Build contact buttons
             let contactHtml = '';
             if (rp.phone || rp.zalo) {
@@ -447,6 +449,7 @@
       </script>
     </div>
   </section>
+
   <!-- FUND TRACKER -->
   <section class="fund-sec" id="fundTracker"
     style="background:#0b1529;padding:clamp(40px,8vw,80px) clamp(16px,4vw,32px)">
