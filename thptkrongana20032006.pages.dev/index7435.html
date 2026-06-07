@@ -336,68 +336,16 @@
   </section>
 
   <!-- REPRESENTATIVES -->
-<style>
-  /* Vòng tròn bao bọc ảnh đại diện */
-  .sp-av-wrap {
-    width: 120px;          /* Chiều rộng vòng tròn */
-    height: 120px;         /* Chiều cao vòng tròn */
-    border-radius: 50%;    /* Biến khung thành hình tròn tuyệt đối */
-    overflow: hidden;      /* Giữ ảnh không tràn ra ngoài viền tròn */
-    margin: 0 auto 15px;   /* Căn giữa vòng tròn và tạo khoảng cách với tên phía dưới */
-    border: 3px solid rgba(255, 255, 255, 0.3); /* Tạo viền trắng mờ sang trọng */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Đổ bóng nhẹ cho khối ảnh */
-    transition: all 0.3s ease; /* Chuyển động mượt mà cho toàn bộ hiệu ứng */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0; /* Nền dự phòng */
-  }
-
-  /* Định dạng ảnh bên trong */
-  .sp-av {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;     /* Cắt ảnh thông minh, không lo ảnh gốc bị bẹp hay kéo giãn */
-    transition: transform 0.3s ease; /* Hiệu ứng mượt riêng cho lúc ảnh phóng to */
-  }
-
-  /* Khung tròn hiển thị Tên lớp khi chưa cập nhật ảnh đại diện */
-  .sp-av-placeholder {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #e0e0e0, #bdbdbd);
-    color: #333;
-    font-weight: bold;
-    font-size: 1.1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto 15px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  }
-
-  /* HIỆU ỨNG HOVER: Khi rà chuột vào khu vực thẻ của thành viên */
-  .sp-c:hover .sp-av-wrap {
-    border-color: #ffffff;  /* Viền tròn sáng lên thành màu trắng rõ hơn */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Bóng đổ đậm hơn tạo độ nổi */
-  }
-
-  .sp-c:hover .sp-av {
-    transform: scale(1.1);  /* Ảnh bên trong tự động phóng to nhẹ 10% */
-  }
-</style>
-
 <section class="rep-sec" id="representatives">
-  <div class="container">
-    <div class="sp-hdr rev">
-      <div class="sl">Ban Liên Lạc</div>
-      <h2 class="st st-white">Đại Diện Các Lớp</h2>
-      <p class="rep-desc">Những người kết nối ngọn lửa lưu luyến giữa các cựu học sinh sau 20 năm xa cách.</p>
-    </div>
-    <div class="rep-g" id="reps-grid"></div>
-    <script>
+    <div class="container">
+      <div class="sp-hdr rev">
+        <div class="sl">Ban Liên Lạc</div>
+        <h2 class="st st-white">Đại Diện Các Lớp</h2>
+        <p class="rep-desc">Những người
+          kết nối ngọn lửa lưu luyến giữa các cựu học sinh sau 20 năm xa cách.</p>
+      </div>
+      <div class="rep-g" id="reps-grid"></div>
+      <script>
       (function () {
         // ╔══════════════════════════════════════════════════════════╗
         // ║       DANH SÁCH ĐẠI DIỆN LỚP – CHỈNH SỬA Ở ĐÂY         ║
@@ -468,39 +416,41 @@
           }
         ];
 
-        document.getElementById('reps-grid').innerHTML = reps.map(rp => {
-          // Xử lý logic: Có ảnh thì hiện ảnh tròn, không có ảnh thì hiện vòng tròn chứa Mã Lớp (classId)
-          const imgHtml = rp.img
-            ? `<div class="sp-av-wrap"><img src="${rp.img}" alt="${rp.name}" class="sp-av"></div>`
-            : `<div class="sp-av-placeholder"><span>${rp.classId}</span></div>`;
-
-          // Tạo cấu trúc nút liên hệ Gọi điện / nhắn Zalo
-          let contactHtml = '';
-          if (rp.phone || rp.zalo) {
-            contactHtml = '<div class="rep-contact">';
-            if (rp.phone) {
-              contactHtml += `<a href="tel:${rp.phone}" class="rep-btn rep-btn-phone" title="Gọi điện"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> ${rp.phone}</a>`;
-            }
-            if (rp.zalo) {
-              contactHtml += `<a href="https://zalo.me/${rp.zalo}" target="_blank" rel="noopener" class="rep-btn rep-btn-zalo" title="Nhắn Zalo"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" width="16" height="16" alt="Zalo"> Zalo</a>`;
-            }
-            contactHtml += '</div>';
+                 // Hàm tự động encode tên file (không cần chỉnh sửa)
+          function imgSrc(filename) {
+            return filename ? '/images/' + encodeURIComponent(filename) : '';
           }
 
-          // Trả về cấu trúc HTML đồng bộ, sạch sẽ
-          return `
-            <div class="sp-c rev">
-              ${imgHtml}
-              <div class="sp-name">${rp.name}</div>
-              <div class="sp-role">${rp.role}</div>
-              ${contactHtml}
-            </div>
-          `;
-        }).join('');
-      })();
-    </script>
-  </div>
-</section>
+          document.getElementById('reps-grid').innerHTML = reps.map(rp => {
+            const pos = rp.pos || 'center center';
+            const imgHtml = rp.img
+              ? `<img src="${imgSrc(rp.img)}" alt="${rp.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:${pos};" onerror="this.style.display='none'">`
+              : '';
+            // Build contact buttons
+            let contactHtml = '';
+            if (rp.phone || rp.zalo) {
+              contactHtml = '<div class="rep-contact">';
+              if (rp.phone) {
+                contactHtml += `<a href="tel:${rp.phone}" class="rep-btn rep-btn-phone" title="Gọi điện"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> ${rp.phone}</a>`;
+              }
+              if (rp.zalo) {
+                contactHtml += `<a href="https://zalo.me/${rp.zalo}" target="_blank" rel="noopener" class="rep-btn rep-btn-zalo" title="Nhắn Zalo"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" width="16" height="16" alt="Zalo"> Zalo</a>`;
+              }
+              contactHtml += '</div>';
+            }
+            return `
+              <div class="sp-c rev">
+                <div class="sp-av" style="position:relative;overflow:hidden">${rp.img ? '' : rp.classId}${imgHtml}</div>
+                <div class="sp-name">${rp.name}</div>
+                <div class="sp-role">${rp.role}</div>
+                ${contactHtml}
+              </div>
+            `;
+          }).join('');
+        })();
+      </script>
+    </div>
+  </section>
   <!-- FUND TRACKER -->
   <section class="fund-sec" id="fundTracker"
     style="background:#0b1529;padding:clamp(40px,8vw,80px) clamp(16px,4vw,32px)">
