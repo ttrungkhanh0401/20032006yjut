@@ -79,16 +79,57 @@
         rực rỡ bên nhau.</p>
       <div class="h-badge"><span class="bdot"></span>Ngày chính thức: 04.07.2026</div>
       <div class="cd-wrap">
-        <div class="cd-sup">Sự kiện diễn ra sau</div>
-        <div class="cd">
-          <div class="cb"><span class="cn" id="d">00</span><span class="cl">Ngày</span></div>
-          <div class="csep">:</div>
-          <div class="cb"><span class="cn" id="h">00</span><span class="cl">Giờ</span></div>
-          <div class="csep">:</div>
-          <div class="cb"><span class="cn" id="m">00</span><span class="cl">Phút</span></div>
-          <div class="csep">:</div>
-          <div class="cb"><span class="cn" id="s">00</span><span class="cl">Giây</span></div>
-        </div>
+      <div class="h-badge"><span class="bdot"></span>Ngày chính thức: 04.07.2026</div>
+<div class="cd-wrap">
+  <div class="cd-sup">Sự kiện diễn ra sau</div>
+  <div class="cd">
+    <div class="cb"><span class="cn" id="d">00</span><span class="cl">Ngày</span></div>
+    <div class="csep">:</div>
+    <div class="cb"><span class="cn" id="h">00</span><span class="cl">Giờ</span></div>
+    <div class="csep">:</div>
+    <div class="cb"><span class="cn" id="m">00</span><span class="cl">Phút</span></div>
+    <div class="csep">:</div>
+    <div class="cb"><span class="cn" id="s">00</span><span class="cl">Giây</span></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  // 1. Xác định thời gian đích (04/07/2026 - Giờ mặc định là 00:00:00)
+  // Bạn có thể thay đổi giờ cụ thể bằng cách thêm giờ, ví dụ: 'July 4, 2026 08:00:00'
+  const targetDate = new Date('July 4, 2026 00:00:00').getTime();
+
+  // Chạy hàm cập nhật mỗi 1 giây (1000 miligiây)
+  const countdownInterval = setInterval(function() {
+
+    // A. Lấy thời gian hiện tại
+    const now = new Date().getTime();
+
+    // B. Tính khoảng cách thời gian còn lại (đây là căn cứ chính)
+    const distance = targetDate - now;
+
+    // C. Tính toán Ngày, Giờ, Phút, Giây còn lại
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // D. Hiển thị kết quả vào các thẻ HTML tương ứng thông qua ID
+    // Dòng này cũng thêm số '0' phía trước nếu con số nhỏ hơn 10 (ví dụ: 09, 08)
+    document.getElementById('d').innerText = days < 10 ? '0' + days : days;
+    document.getElementById('h').innerText = hours < 10 ? '0' + hours : hours;
+    document.getElementById('m').innerText = minutes < 10 ? '0' + minutes : minutes;
+    document.getElementById('s').innerText = seconds < 10 ? '0' + seconds : seconds;
+
+    // Xử lý khi đếm ngược kết thúc
+    if (distance < 0) {
+      clearInterval(countdownInterval);
+      document.querySelector('.cd-wrap').innerHTML = "<h3>SỰ KIỆN ĐANG DIỄN RA!</h3>";
+    }
+  }, 1000);
+})();
+</script>
+      
       </div>
       <div class="h-cta">
         <button onclick="openTicketModal()" class="btn btn-gold btn-gold-hero">💌
