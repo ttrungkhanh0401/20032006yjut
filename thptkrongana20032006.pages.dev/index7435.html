@@ -415,7 +415,11 @@
           ];
 
           // Hàm tự động encode tên file (không cần chỉnh sửa)
-            document.getElementById('reps-grid').innerHTML = reps.map(rp => {
+          function imgSrc(filename) {
+            return filename ?  + encodeURIComponent(filename) : '';
+          }
+
+          document.getElementById('reps-grid').innerHTML = reps.map(rp => {
             const pos = rp.pos || 'center center';
             const imgHtml = rp.img
               ? `<img src="${imgSrc(rp.img)}" alt="${rp.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:${pos};" onerror="this.style.display='none'">`
