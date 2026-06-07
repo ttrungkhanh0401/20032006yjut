@@ -360,7 +360,7 @@
           // ╚══════════════════════════════════════════════════════════╝
           const reps = [
             {
-              img: 'logo.jpg.jpg',
+              img: 'khanha1.jpg',
               classId: '12A1',
               name: 'Trần Trung Khánh',
               role: 'Đại Diện Lớp 12A1',
@@ -377,7 +377,7 @@
               pos: 'center 20%'
             },
             {
-              img: 'favicon.jpg',
+              img: 'bichthao.jpg',
               classId: '12A3',
               name: 'Nguyễn T Bích Thảo',
               role: 'Đại Diện Lớp 12A3',
@@ -395,7 +395,7 @@
               pos: 'center 20%'
             },
             {
-              img: 'le-the-phuong.jpg',
+              img: 'le-the-phu.jpg',
               classId: '12B1',
               name: 'Bạn Hải',
               role: 'Đại Diện Lớp 12B1',
@@ -404,7 +404,7 @@
               pos: 'center 20%'
             },
             {
-              img: 'nguyen-xuan-hoan',
+              img: 'hongb6',
               classId: '12B6',
               name: 'Bạn Hồng',
               role: 'Đại Diện Lớp 12B6',
@@ -417,9 +417,10 @@
           // Hàm tự động encode tên file (không cần chỉnh sửa)
             document.getElementById('reps-grid').innerHTML = reps.map(rp => {
           // Chỉ hiển thị hình ảnh nếu có tên file ảnh
-          const imgHtml = rp.img
-            ? `<div class="sp-av-wrap"><img src="${rp.img}" alt="${rp.name}" class="sp-av"></div>`
-            : '<div class="sp-av-placeholder"><span>N/A</span></div>';
+            const pos = rp.pos || 'center center';
+            const imgHtml = rp.img
+              ? `<img src="${imgSrc(rp.img)}" alt="${rp.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:${pos};" onerror="this.style.display='none'">`
+              : '';
             // Build contact buttons
             let contactHtml = '';
             if (rp.phone || rp.zalo) {
