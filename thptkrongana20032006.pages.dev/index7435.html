@@ -312,9 +312,9 @@
           // ║  amount : số tiền tài trợ                                ║
           // ╚══════════════════════════════════════════════════════════╝
           const sponsors = [
-{img:'hongb6.jpg',name:'Mạnh thường quân 1',role:'',org:'Cựu học sinh lớp 12...',amount:'30.000.000đ'},
-{img:'dunga9.jpg',name:'Mạnh thường quân 2',role:'',org:'Cựu học sinh lớp 12...',amount:'5.000.000đ'},
-{img:'thaoa4.jpg',name:'Mạnh thường quân 3',role:'',org:'Cựu học sinh lớp 12...',amount:'2.100.000đ'},
+{img:'hongb6.jpg',name:'Mạnh thường quân 1',role:'',org:'Cựu học sinh lớp 12...',amount:'0đ'},
+{img:'dunga9.jpg',name:'Mạnh thường quân 2',role:'',org:'Cựu học sinh lớp 12...',amount:'0đ'},
+{img:'thaoa4.jpg',name:'Mạnh thường quân 3',role:'',org:'Cựu học sinh lớp 12...',amount:'0đ'},
 ];
           function imgSrc(filename) { return filename ? '/images/' + encodeURIComponent(filename) : 'logo.jpg'; }
           document.getElementById('sponsors-grid').innerHTML = sponsors.map((sp, idx) => {
@@ -395,6 +395,15 @@
               pos: 'center 20%'
             },
             {
+              img: 'dunga9.jpg',
+              classId: '12A9',
+              name: 'Bạn Dũng',
+              role: 'Đại Diện Lớp 12A9',
+              phone: '0965571717',
+              zalo: '0965571717'
+            },
+
+            {
               img: 'favicon.jpg',
               classId: '12B1',
               name: 'Bạn Hải',
@@ -415,15 +424,37 @@
           ];
 
           // Hàm tự động encode tên file (không cần chỉnh sửa)
-          function imgSrc(filename) {
-            return filename ? '/images/' + encodeURIComponent(filename) : '';
-          }
+        (function () {
+  // ... (Phần khai báo mảng reps giữ nguyên) ...
 
-          document.getElementById('reps-grid').innerHTML = reps.map(rp => {
-            const pos = rp.pos || 'center center';
-            const imgHtml = rp.img
-              ? `<img src="${imgSrc(rp.img)}" alt="${rp.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:${pos};" onerror="this.style.display='none'">`
-              : '';
+  // Hàm tự động encode tên file (ĐÃ SỬA để dùng trong cùng thư mục)
+  function imgSrc(filename) {
+    return filename ? encodeURIComponent(filename) : '';
+  }
+
+  document.getElementById('reps-grid').innerHTML = reps.map(rp => {
+    const pos = rp.pos || 'center center';
+    // imgHtml được tạo ra với đường dẫn ảnh mới,
+    // nhưng giữ nguyên style inline để đảm bảo kích thước và kiểu hiển thị.
+    const imgHtml = rp.img
+      ? `<img src="${imgSrc(rp.img)}" alt="${rp.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:${pos};" onerror="this.style.display='none'">`
+      : '';
+
+    // ... (Phần xây dựng contactHtml giữ nguyên) ...
+
+    return `
+      <div class="sp-c rev">
+        <div class="sp-av" style="position:relative;overflow:hidden">
+          ${rp.img ? '' : rp.classId}
+          ${imgHtml}
+        </div>
+        <div class="sp-name">${rp.name}</div>
+        <div class="sp-role">${rp.role}</div>
+        ${contactHtml}
+      </div>
+    `;
+  }).join('');
+})();
             // Build contact buttons
             let contactHtml = '';
             if (rp.phone || rp.zalo) {
@@ -482,7 +513,7 @@
               Tổng Quỹ Hiện Tại</div>
             <div class="fund-amount"
               style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:700;color:var(--gold-light);text-shadow:0 0 20px rgba(212,168,67,0.3)">
-              <span id="fundTotal" data-target="5000000">5.000.000</span>đ
+              <span id="fundTotal" data-target="1000000">1.000.000</span>đ
             </div>
           </div>
           <div class="fund-divider"></div>
@@ -515,7 +546,7 @@
                 elCount.textContent = Math.floor(ease * vCount);
                 if (p < 1) requestAnimationFrame(step);
                 else {
-                  elTotal.textContent = "5.000.000";
+                  elTotal.textContent = "1.000.000";
                   elCount.textContent = "3";
                 }
               }
@@ -580,8 +611,8 @@
         <div class="dc">
           <div class="dc-i">🥂</div>
           <div>
-            <div class="dc-occ">Tiệc tại nhà hàng</div>
-            <div class="dc-det">Áo thun đồng phục (BTC cung cấp)<br><span class="text-muted">Quần / váy tự
+            <div class="dc-occ">Tiệc tại sân trường</div>
+            <div class="dc-det">Trang phục tự do<br><span class="text-muted">Quần / váy tự
                 chọn</span></div>
           </div>
         </div>
@@ -613,10 +644,10 @@
         </div>
       </div>
       <div class="fi rev">
-        <div class="fq">Địa điểm tiệc tại nhà hàng ở đâu?<div class="fa-arrow">▼</div>
+        <div class="fq">Địa điểm tiệc tại tổ chức tiệc ở đâu?<div class="fa-arrow">▼</div>
         </div>
         <div class="fa-body">
-          <div class="fa-inner">Tiệc giao lưu Reunion sẽ được tổ chức tại <strong>Nhà Hàng Ngọc Lệ 2</strong>. Thông tin
+          <div class="fa-inner">Tiệc giao lưu Reunion sẽ được tổ chức tại <strong>Sân trường  Y Jut</strong>. Thông tin
             cụ thể sẽ được cập nhật thêm trên
             nhóm lớp và trang sự kiện này.</div>
         </div>
@@ -625,8 +656,7 @@
         <div class="fq">Hạn chót đăng ký là khi nào?<div class="fa-arrow">▼</div>
         </div>
         <div class="fa-body">
-          <div class="fa-inner">Vui lòng đăng ký trước ngày 01.06.2026 để đảm bảo đủ áo đồng phục, quà lưu niệm và suất
-            tiệc.</div>
+          <div class="fa-inner">Vui lòng đăng ký trước ngày 15.06.2026 để đảm bảo BTC có thể chuẩn bị tiếp đón các bạn chu đáo nhất</div>
         </div>
       </div>
       <div class="fi rev">
@@ -762,12 +792,26 @@
           <select id="tkClass"
             style="width:100%;background:rgba(0,0,0,0.4);border:1px solid rgba(212,168,67,0.3);padding:14px;border-radius:8px;color:#fff;font-family:inherit;font-size:1rem;outline:none;cursor:pointer;appearance:none">
             <option value="" disabled selected>Chọn Lớp...</option>
-            <option value="12A">Lớp 12A1</option>
-            <option value="12B">Lớp 12A2</option>
-            <option value="12C">Lớp 12A3</option>
-            <option value="12D">Lớp 12A4/option>
-            <option value="12E">Lớp 12A5</option>
-            <option value="12G">Lớp 12...</option>
+            <option value="12A1">Lớp 12A1</option>
+            <option value="12A2">Lớp 12A2</option>
+            <option value="12A3">Lớp 12A3</option>
+            <option value="12A4">Lớp 12A4</option>
+            <option value="12A5">Lớp 12A5</option>
+            <option value="12A6">Lớp 12A6</option>
+            <option value="12A7">Lớp 12A7</option>            
+            <option value="12A8">Lớp 12A8</option>
+            <option value="12A9">Lớp 12A9</option>
+            <option value="12A10">Lớp 12A10</option>
+            <option value="12B1">Lớp 12B1</option>
+            <option value="12B2">Lớp 12B2</option>
+            <option value="12B3">Lớp 12B3</option>
+            <option value="12B4">Lớp 12B4</option>
+            <option value="12B5">Lớp 12B5</option>
+            <option value="12B6">Lớp 12B6</option>
+            <option value="12B7">Lớp 12B7</option>
+            <option value="12B8">Lớp 12B8</option>
+            <option value="12B9">Lớp 12B9</option>
+            <option value="12B10">Lớp 12B10</option>
             <option value="Khách">Khách Mời / Thầy Cô</option>
           </select>
         </div>
