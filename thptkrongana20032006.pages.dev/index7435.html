@@ -312,9 +312,9 @@
           // ║  amount : số tiền tài trợ                                ║
           // ╚══════════════════════════════════════════════════════════╝
           const sponsors = [
-{img:'logo.jpg',name:'Mạnh thường quân 1',role:'',org:'Cựu học sinh lớp 12...',amount:'30.000.000đ'},
-{img:'sp_hoa.jpg',name:'Mạnh thường quân 2',role:'',org:'Cựu học sinh lớp 12...',amount:'5.000.000đ'},
-{img:'le-thu-huong.jpg',name:'Mạnh thường quân 3',role:'',org:'Cựu học sinh lớp 12...',amount:'2.100.000đ'},
+{img:'hongb6.jpg',name:'Mạnh thường quân 1',role:'',org:'Cựu học sinh lớp 12...',amount:'30.000.000đ'},
+{img:'dunga9.jpg',name:'Mạnh thường quân 2',role:'',org:'Cựu học sinh lớp 12...',amount:'5.000.000đ'},
+{img:'thaoa4.jpg',name:'Mạnh thường quân 3',role:'',org:'Cựu học sinh lớp 12...',amount:'2.100.000đ'},
 ];
           function imgSrc(filename) { return filename ? '/images/' + encodeURIComponent(filename) : 'logo.jpg'; }
           document.getElementById('sponsors-grid').innerHTML = sponsors.map((sp, idx) => {
@@ -417,13 +417,9 @@
         ];
 
                  // Hàm tự động encode tên file (không cần chỉnh sửa)
-          function imgSrc(filename) {
-            return filename ? '/images/' + encodeURIComponent(filename) : '';
-          }
-
-          document.getElementById('reps-grid').innerHTML = reps.map(rp => {
-            const pos = rp.pos || 'center center';
-            const imgHtml = rp.img
+            document.getElementById('reps-grid').innerHTML = reps.map(rp => {
+          // Chỉ hiển thị hình ảnh nếu có tên file ảnh
+          const imgHtml = rp.img
               ? `<img src="${imgSrc(rp.img)}" alt="${rp.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:${pos};" onerror="this.style.display='none'">`
               : '';
             // Build contact buttons
