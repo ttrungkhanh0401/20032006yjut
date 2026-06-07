@@ -332,7 +332,7 @@
         <div class="sl">Nhà Tài Trợ</div>
         <h2 class="st st-white">Những Người Tiên Phong</h2>
         <p class="rep-desc" style="color:var(--gold-light); font-size:1.15rem; margin-top:8px; font-weight:bold;">Tổng
-          số tiền tài trợ: 0đ</p>
+          số tiền tài trợ: 10.000.000đ</p>
       </div>
       <div class="sp-g" id="sponsors-grid"></div>
       <script>
@@ -548,8 +548,8 @@
         <script>
           // Bypassing any external script caching by forcing the update inline!
           setTimeout(function () {
-            var vTotal = 5000000;
-            var vCount = 3;
+            var vTotal = 10000000;
+            var vCount = 1;
             var elTotal = document.getElementById('fundTotal');
             var elCount = document.getElementById('fundCount');
             if (elTotal && elCount) {
@@ -563,8 +563,8 @@
                 elCount.textContent = Math.floor(ease * vCount);
                 if (p < 1) requestAnimationFrame(step);
                 else {
-                  elTotal.textContent = "1.000.000";
-                  elCount.textContent = "3";
+                  elTotal.textContent = "10.000.000";
+                  elCount.textContent = "1";
                 }
               }
               requestAnimationFrame(step);
