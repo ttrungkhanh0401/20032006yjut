@@ -424,37 +424,15 @@
           ];
 
           // Hàm tự động encode tên file (không cần chỉnh sửa)
-        (function () {
-  // ... (Phần khai báo mảng reps giữ nguyên) ...
+          function imgSrc(filename) {
+            return filename ? encodeURIComponent(filename) : '';
+          }
 
-  // Hàm tự động encode tên file (ĐÃ SỬA để dùng trong cùng thư mục)
-  function imgSrc(filename) {
-    return filename ? encodeURIComponent(filename) : '';
-  }
-
-  document.getElementById('reps-grid').innerHTML = reps.map(rp => {
-    const pos = rp.pos || 'center center';
-    // imgHtml được tạo ra với đường dẫn ảnh mới,
-    // nhưng giữ nguyên style inline để đảm bảo kích thước và kiểu hiển thị.
-    const imgHtml = rp.img
-      ? `<img src="${imgSrc(rp.img)}" alt="${rp.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:${pos};" onerror="this.style.display='none'">`
-      : '';
-
-    // ... (Phần xây dựng contactHtml giữ nguyên) ...
-
-    return `
-      <div class="sp-c rev">
-        <div class="sp-av" style="position:relative;overflow:hidden">
-          ${rp.img ? '' : rp.classId}
-          ${imgHtml}
-        </div>
-        <div class="sp-name">${rp.name}</div>
-        <div class="sp-role">${rp.role}</div>
-        ${contactHtml}
-      </div>
-    `;
-  }).join('');
-})();
+          document.getElementById('reps-grid').innerHTML = reps.map(rp => {
+            const pos = rp.pos || 'center center';
+            const imgHtml = rp.img
+              ? `<img src="${imgSrc(rp.img)}" alt="${rp.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:${pos};" onerror="this.style.display='none'">`
+              : '';
             // Build contact buttons
             let contactHtml = '';
             if (rp.phone || rp.zalo) {
