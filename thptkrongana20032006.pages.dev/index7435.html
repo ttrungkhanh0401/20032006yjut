@@ -416,7 +416,6 @@
 
           // Hàm tự động encode tên file (không cần chỉnh sửa)
             document.getElementById('reps-grid').innerHTML = reps.map(rp => {
-          // Chỉ hiển thị hình ảnh nếu có tên file ảnh
             const pos = rp.pos || 'center center';
             const imgHtml = rp.img
               ? `<img src="${imgSrc(rp.img)}" alt="${rp.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:${pos};" onerror="this.style.display='none'">`
