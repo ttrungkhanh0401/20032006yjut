@@ -482,7 +482,7 @@
               Tổng Quỹ Hiện Tại</div>
             <div class="fund-amount"
               style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:700;color:var(--gold-light);text-shadow:0 0 20px rgba(212,168,67,0.3)">
-              <span id="fundTotal" data-target="0">chưa phát sinh</span>đ
+              <span id="fundTotal" data-target="5000000">5.000.000</span>đ
             </div>
           </div>
           <div class="fund-divider"></div>
@@ -492,7 +492,7 @@
               Nhà Tài Trợ</div>
             <div class="fund-amount"
               style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:700;color:var(--white)">
-              <span id="fundCount" data-target="0">chưa phát sinh</span>
+              <span id="fundCount" data-target="3">3</span>
             </div>
           </div>
         </div>
@@ -500,8 +500,8 @@
         <script>
           // Bypassing any external script caching by forcing the update inline!
           setTimeout(function () {
-            var vTotal = o,0001;
-            var vCount = 1;
+            var vTotal = 5000000;
+            var vCount = 3;
             var elTotal = document.getElementById('fundTotal');
             var elCount = document.getElementById('fundCount');
             if (elTotal && elCount) {
@@ -515,8 +515,8 @@
                 elCount.textContent = Math.floor(ease * vCount);
                 if (p < 1) requestAnimationFrame(step);
                 else {
-                  elTotal.textContent = "0,0001";
-                  elCount.textContent = "1";
+                  elTotal.textContent = "5.000.000";
+                  elCount.textContent = "3";
                 }
               }
               requestAnimationFrame(step);
