@@ -417,11 +417,11 @@
         ];
 
                  // Hàm tự động encode tên file (không cần chỉnh sửa)
-            document.getElementById('reps-grid').innerHTML = reps.map(rp => {
+          document.getElementById('reps-grid').innerHTML = reps.map(rp => {
           // Chỉ hiển thị hình ảnh nếu có tên file ảnh
           const imgHtml = rp.img
-              ? `<img src="${imgSrc(rp.img)}" alt="${rp.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:${pos};" onerror="this.style.display='none'">`
-              : '';
+            ? `<div class="sp-av-wrap"><img src="${rp.img}" alt="${rp.name}" class="sp-av"></div>`
+            : '<div class="sp-av-placeholder"><span>N/A</span></div>';
             // Build contact buttons
             let contactHtml = '';
             if (rp.phone || rp.zalo) {
