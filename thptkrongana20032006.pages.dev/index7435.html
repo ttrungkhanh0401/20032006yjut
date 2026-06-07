@@ -312,11 +312,11 @@
           // ║  amount : số tiền tài trợ                                ║
           // ╚══════════════════════════════════════════════════════════╝
           const sponsors = [
-{img:'sp_dong.jpg',name:'Mạnh thường quân 1',role:'',org:'Cựu học sinh lớp 12...',amount:'30.000.000đ'},
+{img:'logo.jpg',name:'Mạnh thường quân 1',role:'',org:'Cựu học sinh lớp 12...',amount:'30.000.000đ'},
 {img:'sp_hoa.jpg',name:'Mạnh thường quân 2',role:'',org:'Cựu học sinh lớp 12...',amount:'5.000.000đ'},
 {img:'le-thu-huong.jpg',name:'Mạnh thường quân 3',role:'',org:'Cựu học sinh lớp 12...',amount:'2.100.000đ'},
 ];
-          function imgSrc(filename) { return filename ? '/images/' + encodeURIComponent(filename) : ''; }
+          function imgSrc(filename) { return filename ? '/images/' + encodeURIComponent(filename) : 'logo.jpg'; }
           document.getElementById('sponsors-grid').innerHTML = sponsors.map((sp, idx) => {
             const num = String(idx + 1).padStart(2, '0');
             let avContent = '';
@@ -376,12 +376,47 @@
               zalo: '0944194347',
               pos: 'center 20%'
             },
-            
+            {
+              img: 'favicon.jpg',
+              classId: '12A3',
+              name: 'Nguyễn T Bích Thảo',
+              role: 'Đại Diện Lớp 12A3',
+              phone: '0987355357',
+              zalo: '0987355357',
+              pos: 'center 20%'
+            },
+            {
+              img: 'favicon.jpg',
+              classId: '12A7',
+              name: 'Bạn Hùng',
+              role: 'Đại Diện Lớp 12A7',
+              phone: '0975567114',
+              zalo: '0975567114',
+              pos: 'center 20%'
+            },
+            {
+              img: 'favicon.jpg',
+              classId: '12B1',
+              name: 'Bạn Hải',
+              role: 'Đại Diện Lớp 12B1',
+              phone: '0987434747',
+              zalo: '0987434747',
+              pos: 'center 20%'
+            },
+            {
+              img: 'favicon.jpg',
+              classId: '12B6',
+              name: 'Bạn Hồng',
+              role: 'Đại Diện Lớp 12B6',
+              phone: '0375271986',
+              zalo: '0375271986',
+              pos: 'center 20%'
+            },
           ];
 
           // Hàm tự động encode tên file (không cần chỉnh sửa)
           function imgSrc(filename) {
-            return filename ? '/' + encodeURIComponent(filename) : '';
+            return filename ? '/images/' + encodeURIComponent(filename) : '';
           }
 
           document.getElementById('reps-grid').innerHTML = reps.map(rp => {
@@ -465,8 +500,8 @@
         <script>
           // Bypassing any external script caching by forcing the update inline!
           setTimeout(function () {
-            var vTotal = 0;
-            var vCount = 0;
+            var vTotal = o,0001;
+            var vCount = 1;
             var elTotal = document.getElementById('fundTotal');
             var elCount = document.getElementById('fundCount');
             if (elTotal && elCount) {
@@ -480,8 +515,8 @@
                 elCount.textContent = Math.floor(ease * vCount);
                 if (p < 1) requestAnimationFrame(step);
                 else {
-                  elTotal.textContent = "0";
-                  elCount.textContent = "0";
+                  elTotal.textContent = "0,0001";
+                  elCount.textContent = "1";
                 }
               }
               requestAnimationFrame(step);
