@@ -341,7 +341,7 @@
         <div class="sl">Nhà Tài Trợ</div>
         <h2 class="st st-white">Những Người Tiên Phong</h2>
         <p class="rep-desc" style="color:var(--gold-light); font-size:1.15rem; margin-top:8px; font-weight:bold;">Tổng
-          số tiền tài trợ: 10.000.000đ</p>
+          số tiền tài trợ: 20.000.000đ</p>
       </div>
       <div class="sp-g" id="sponsors-grid"></div>
       <script>
@@ -358,8 +358,8 @@
           // ╚══════════════════════════════════════════════════════════╝
           const sponsors = [
 {img:'vietb5.jpg',name:'Mai Thị Thuý Việt',role:'',org:'Cựu học sinh lớp 12B5',amount:'10.0000.000đ'},
-{img:'taitro.jpg',name:'Mạnh thường quân 2',role:'',org:'Cựu học sinh lớp 12...',amount:'0đ'},
-{img:'tongthong.jpg',name:'Mạnh thường quân 3',role:'',org:'Cựu học sinh lớp 12...',amount:'0đ'},
+{img:'huongb3.jpg',name:'Vũ Thị Mỹ Hương',role:'',org:'Cựu học sinh lớp 12B3',amount:'10.000.000đ'},
+{img:'taitro.jpg',name:'Mạnh thường quân 3',role:'',org:'Cựu học sinh lớp 12...',amount:'0đ'},
 ];
           function imgSrc(filename) {
             return filename ? encodeURIComponent(filename) : '';
@@ -647,7 +647,7 @@
               Tổng Quỹ Hiện Tại</div>
             <div class="fund-amount"
               style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:700;color:var(--gold-light);text-shadow:0 0 20px rgba(212,168,67,0.3)">
-              <span id="fundTotal" data-target="10000000">10.000.000</span>đ
+              <span id="fundTotal" data-target="20000000">20.000.000</span>đ
             </div>
           </div>
           <div class="fund-divider"></div>
@@ -657,7 +657,7 @@
               Nhà Tài Trợ</div>
             <div class="fund-amount"
               style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:700;color:var(--white)">
-              <span id="fundCount" data-target="1">1</span>
+              <span id="fundCount" data-target="2">2</span>
             </div>
           </div>
         </div>
@@ -665,8 +665,8 @@
         <script>
           // Bypassing any external script caching by forcing the update inline!
           setTimeout(function () {
-            var vTotal = 10000000;
-            var vCount = 1;
+            var vTotal = 20000000;
+            var vCount = 2;
             var elTotal = document.getElementById('fundTotal');
             var elCount = document.getElementById('fundCount');
             if (elTotal && elCount) {
@@ -680,8 +680,8 @@
                 elCount.textContent = Math.floor(ease * vCount);
                 if (p < 1) requestAnimationFrame(step);
                 else {
-                  elTotal.textContent = "10.000.000";
-                  elCount.textContent = "1";
+                  elTotal.textContent = "20.000.000";
+                  elCount.textContent = "2";
                 }
               }
               requestAnimationFrame(step);
