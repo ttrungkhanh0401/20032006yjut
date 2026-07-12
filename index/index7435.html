@@ -241,6 +241,8 @@
 
     </div>
   </section>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+
   <section class="slider-section" style="padding: 40px 16px; background: #0B1529; text-align: center;">
     <div class="container" style="max-width: 800px; margin: 0 auto;">
       
@@ -251,19 +253,44 @@
       <div style="position: relative; overflow: hidden; border-radius: 16px; border: 1px solid rgba(212,168,67,0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
         <div class="slider-container" id="googlePhotosSlider" style="display: flex; transition: transform 0.5s ease-in-out; width: 100%;">
           
-          <img src="https://lh3.googleusercontent.com/d/1T8yE758nOJVH8QlUcb6dohfcDsj0HoMS" alt="Kỷ niệm Google Photos" style="width: 100%; flex-shrink: 0; aspect-ratio: 16/9; object-fit: cover;">
-          <img src="https://link-anh-google-photos-2.jpg" alt="Kỷ niệm Google Photos" style="width: 100%; flex-shrink: 0; aspect-ratio: 16/9; object-fit: cover;">
-          <img src="https://link-anh-google-photos-3.jpg" alt="Kỷ niệm Google Photos" style="width: 100%; flex-shrink: 0; aspect-ratio: 16/9; object-fit: cover;">
+          <div class="g-slide-item" style="width: 100%; flex-shrink: 0; overflow: hidden;">
+            <a href="https://lh3.googleusercontent.com/d/1O3k4j7ch1wb3knBh-AAxMSRQL71pMmzw" data-fancybox="gallery" data-caption="Kỷ niệm Hội khóa 1">
+              <img src="https://lh3.googleusercontent.com/d/1O3k4j7ch1wb3knBh-AAxMSRQL71pMmzw" alt="Kỷ niệm Google Photos" class="zoom-effect" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; cursor: pointer; transition: transform 0.4s ease;">
+            </a>
+          </div>
+
+          <div class="g-slide-item" style="width: 100%; flex-shrink: 0; overflow: hidden;">
+            <a href="https://lh3.googleusercontent.com/d/1nqtkuYmPRY_54nMrkHRL0ebxPpy-HLWM" data-fancybox="gallery" data-caption="Kỷ niệm Hội khóa 2">
+              <img src="https://lh3.googleusercontent.com/d/1nqtkuYmPRY_54nMrkHRL0ebxPpy-HLWM" alt="Kỷ niệm Google Photos" class="zoom-effect" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; cursor: pointer; transition: transform 0.4s ease;">
+            </a>
+          </div>
+
+          <div class="g-slide-item" style="width: 100%; flex-shrink: 0; overflow: hidden;">
+            <a href="https://lh3.googleusercontent.com/d/1nqtkuYmPRY_54nMrkHRL0ebxPpy-HLWM" data-fancybox="gallery" data-caption="Kỷ niệm Hội khóa 3">
+              <img src="https://lh3.googleusercontent.com/d/1nqtkuYmPRY_54nMrkHRL0ebxPpy-HLWM" alt="Kỷ niệm Google Photos" class="zoom-effect" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; cursor: pointer; transition: transform 0.4s ease;">
+            </a>
+          </div>
           
         </div>
         
-        <button id="gPrevSlide" style="position: absolute; top: 50%; left: 16px; transform: translateY(-50%); background: rgba(11,21,41,0.7); border: 1px solid #D4A843; color: #fff; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.2rem; z-index: 10;">❮</button>
-        <button id="gNextSlide" style="position: absolute; top: 50%; right: 16px; transform: translateY(-50%); background: rgba(11,21,41,0.7); border: 1px solid #D4A843; color: #fff; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.2rem; z-index: 10;">❯</button>
+        <button id="gPrevSlide" style="position: absolute; top: 50%; left: 16px; transform: translateY(-50%); background: rgba(11,21,41,0.7); border: 1px solid #D4A843; color: #fff; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.2rem; z-index: 10; transition: all 0.3s;">❮</button>
+        <button id="gNextSlide" style="position: absolute; top: 50%; right: 16px; transform: translateY(-50%); background: rgba(11,21,41,0.7); border: 1px solid #D4A843; color: #fff; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.2rem; z-index: 10; transition: all 0.3s;">❯</button>
 
         <div id="gSliderDots" style="position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10;"></div>
       </div>
     </div>
   </section>
+
+  <style>
+    .zoom-effect:hover {
+      transform: scale(1.03); /* Phóng nhẹ ảnh lên tạo cảm giác nổi bật */
+      filter: brightness(1.1); /* Tăng nhẹ độ sáng khi đưa chuột vào */
+    }
+    #gPrevSlide:hover, #gNextSlide:hover {
+      background: #D4A843 !important;
+      color: #0B1529 !important;
+    }
+  </style>
 
   <!-- REPRESENTATIVES -->
   <section class="rep-sec" id="representatives">
@@ -668,22 +695,38 @@
       wrapper.addEventListener('mouseleave', () => autoPlay = setInterval(nextSlide, slideInterval));
     })();
   </script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
   <script>
-    // Script điều khiển độc lập cho Slider Google Photos mới
+    // Kích hoạt tính năng click ảnh để xem phóng to thu nhỏ và cho phép tải về
+    Fancybox.bind("[data-fancybox='gallery']", {
+      Toolbar: {
+        display: {
+          left: ["infobar"],
+          center: [],
+          right: ["zoom", "slideshow", "download", "close"], // Thêm nút download ở góc phải góc trên
+        },
+      },
+      Images: {
+        zoom: true, // Cho phép dùng lăn chuột hoặc ngón tay thu phóng ảnh
+      },
+    });
+
+    // Script điều khiển chạy slide ảnh tự động và chấm phân trang độc lập
     (function () {
       const sliderContainer = document.getElementById('googlePhotosSlider');
-      const slides = sliderContainer.getElementsByTagName('img');
+      const slides = sliderContainer.getElementsByClassName('g-slide-item');
       const prevBtn = document.getElementById('gPrevSlide');
       const nextBtn = document.getElementById('gNextSlide');
       const dotsContainer = document.getElementById('gSliderDots');
       
       let currentIndex = 0;
       const totalSlides = slides.length;
-      const slideInterval = 4500; // Tự động chuyển ảnh sau mỗi 4.5 giây
+      const slideInterval = 4500; // 4.5 giây tự động chuyển slide
 
       if (totalSlides === 0) return;
 
-      // Tạo các chấm tròn chuyển ảnh tương ứng số lượng hình
+      // Tạo các chấm tròn tương ứng số lượng ảnh
       for (let i = 0; i < totalSlides; i++) {
         const dot = document.createElement('div');
         dot.style.width = '10px';
@@ -691,7 +734,7 @@
         dot.style.borderRadius = '50%';
         dot.style.background = i === 0 ? '#D4A843' : 'rgba(255,255,255,0.4)';
         dot.style.cursor = 'pointer';
-        dot.style.transition = 'background 0.3s';
+        dot.style.transition = 'all 0.3s';
         dot.addEventListener('click', () => goToSlide(i));
         dotsContainer.appendChild(dot);
       }
@@ -701,7 +744,15 @@
       function updateSlider() {
         sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
         for (let i = 0; i < dots.length; i++) {
-          dots[i].style.background = i === currentIndex ? '#D4A843' : 'rgba(255,255,255,0.4)';
+          if (i === currentIndex) {
+            dots[i].style.background = '#D4A843';
+            dots[i].style.width = '24px'; /* Kéo dài chấm hiện tại nhìn hiện đại */
+            dots[i].style.borderRadius = '5px';
+          } else {
+            dots[i].style.background = 'rgba(255,255,255,0.4)';
+            dots[i].style.width = '10px';
+            dots[i].style.borderRadius = '50%';
+          }
         }
       }
 
@@ -723,13 +774,16 @@
       nextBtn.addEventListener('click', nextSlide);
       prevBtn.addEventListener('click', prevSlide);
 
-      // Tự động chạy bộ đếm thời gian
+      // Tự động chạy slide ban đầu
       let autoPlay = setInterval(nextSlide, slideInterval);
 
-      // Tạm dừng chạy khi di chuột vào ảnh để người xem tiện quan sát
+      // Tạm dừng chạy tự động khi người dùng di chuột vào vùng slide, hoặc khi đang mở phóng to ảnh
       const wrapper = sliderContainer.parentElement;
       wrapper.addEventListener('mouseenter', () => clearInterval(autoPlay));
-      wrapper.addEventListener('mouseleave', () => autoPlay = setInterval(nextSlide, slideInterval));
+      wrapper.addEventListener('mouseleave', () => {
+        clearInterval(autoPlay);
+        autoPlay = setInterval(nextSlide, slideInterval);
+      });
     })();
   </script>
 </body>
