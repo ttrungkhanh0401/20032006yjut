@@ -28,6 +28,38 @@
   <link rel="stylesheet" crossorigin href="assets/index-BGWx1F3x.css">
   <script type="module">import'data:text/javascript,if(!import.meta.resolve)throw Error("import.meta.resolve not supported")';import.meta.url;import("_").catch(()=>1);(async function*(){})().next();window.__vite_is_modern_browser=true</script>
   <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
+<style>
+    /* Khung chat mini tinh chỉnh để không đè lên web cũ */
+    .chat-container { 
+        width: 100%; 
+        max-width: 400px; 
+        height: 550px; 
+        background: #ffffff; 
+        border-radius: 12px; 
+        box-shadow: 0 5px 25px rgba(0,0,0,0.15); 
+        display: flex; 
+        flex-direction: column; 
+        overflow: hidden;
+        margin: 20px auto; /* Căn giữa hoặc bạn có thể đặt vào sidebar */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .chat-header { background: #4a90e2; color: #fff; padding: 15px; text-align: center; font-size: 1.1rem; font-weight: bold; }
+    .login-screen { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; padding: 25px; gap: 15px; }
+    .login-screen h3 { color: #333; font-size: 1rem; margin-bottom: 5px; }
+    .login-screen input, .login-screen select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; outline: none; }
+    .login-screen button { width: 100%; padding: 10px; background: #4a90e2; color: white; border: none; border-radius: 6px; font-size: 0.95rem; cursor: pointer; font-weight: bold; }
+    .login-screen button:hover { background: #357abd; }
+    .chat-box { flex: 1; padding: 15px; overflow-y: auto; background: #f9f9f9; display: none; flex-direction: column; gap: 10px; }
+    .message { max-width: 80%; padding: 8px 12px; border-radius: 8px; word-wrap: break-word; display: flex; flex-direction: column; }
+    .message .meta { font-size: 0.7rem; font-weight: bold; color: #666; margin-bottom: 2px; }
+    .message .text { font-size: 0.9rem; line-height: 1.4; color: #333; }
+    .message.other { background: #e2e8f0; align-self: flex-start; }
+    .message.me { background: #d2e3fc; align-self: flex-end; }
+    .message.me .meta { color: #1a73e8; text-align: right; }
+    .input-area { padding: 10px; background: #fff; border-top: 1px solid #ddd; display: none; gap: 10px; }
+    .input-area input { flex: 1; padding: 10px 15px; border: 1px solid #ddd; border-radius: 20px; outline: none; font-size: 0.9rem; }
+    .input-area button { padding: 0 15px; background: #4a90e2; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
+</style>
 </head>
 
 <body>
@@ -1507,6 +1539,27 @@
 
   </div>
 </div>
+<!-- KHUNG CHAT HỌC SINH -->
+<div class="chat-container">
+    <div class="chat-header">Phòng Chat Học Sinh</div>
+
+    <!-- Giao diện Nhập tên & lớp -->
+    <div class="login-screen" id="loginScreen">
+        <h3>Nhập thông tin để trò chuyện</h3>
+        <input type="text" id="usernameInput" placeholder="Tên của bạn..." required>
+        <select id="classSelect"></select>
+        <button onclick="joinChat()">Vào Phòng Chat</button>
+    </div>
+
+    <!-- Vùng chứa tin nhắn -->
+    <div class="chat-box" id="chatBox"></div>
+
+    <!-- Ô nhập chữ để gửi -->
+    <div class="input-area" id="inputArea">
+        <input type="text" id="messageInput" placeholder="Nhập nội dung..." onkeypress="checkEnter(event)">
+        <button onclick="sendMessage()">Gửi</button>
+    </div>
+</div>
   <!-- REPRESENTATIVES -->
   <section class="rep-sec" id="representatives">
     <div class="container">
@@ -2001,6 +2054,49 @@
       });
     })();
   </script>
+<script>
+    // Tự động tạo danh sách lớp từ A1->A10 và B1->B9
+    const cSelect = document.getElementById('classSelect');
+    for(let i=1; i<=10; i++) cSelect.innerHTML += `<option value="A${i}">Lớp A${i}</option>`;
+    for(let i=1; i<=9; i++) cSelect.innerHTML += `<option value="B${i}">Lớp B${i}</option>`;
+
+    let userChatInfo = { name: "", className: "" };
+
+    function joinChat() {
+        const name = document.getElementById('usernameInput').value.trim();
+        if (name === "") { alert("Bạn chưa nhập tên kìa!"); return; }
+        
+        userChatInfo.name = name;
+        userChatInfo.className = cSelect.value;
+
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('chatBox').style.display = 'flex';
+        document.getElementById('inputArea').style.display = 'flex';
+
+        // Tin nhắn hệ thống chào mừng
+        addMsgIntoBox("Hệ thống", "Hệ thống", `Chào mừng [${userChatInfo.className}] ${userChatInfo.name} đã tham gia!`, 'other');
+    }
+
+    function addMsgIntoBox(name, className, text, type) {
+        const box = document.getElementById('chatBox');
+        const div = document.createElement('div');
+        div.classList.add('message', type);
+        div.innerHTML = `<div class="meta">[${className}] ${name}</div><div class="text">${text}</div>`;
+        box.appendChild(div);
+        box.scrollTop = box.scrollHeight;
+    }
+
+    function sendMessage() {
+        const input = document.getElementById('messageInput');
+        const text = input.value.trim();
+        if (text === "") return;
+
+        addMsgIntoBox(userChatInfo.name, userChatInfo.className, text, 'me');
+        input.value = "";
+    }
+
+    function checkEnter(e) { if (e.key === "Enter") sendMessage(); }
+</script>
 </body>
 
 
