@@ -29,7 +29,6 @@
   <script type="module">import'data:text/javascript,if(!import.meta.resolve)throw Error("import.meta.resolve not supported")';import.meta.url;import("_").catch(()=>1);(async function*(){})().next();window.__vite_is_modern_browser=true</script>
   <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
 <style>
-    /* Khung chat mini tinh chỉnh để không đè lên web cũ */
     .chat-container { 
         width: 100%; 
         max-width: 400px; 
@@ -40,7 +39,7 @@
         display: flex; 
         flex-direction: column; 
         overflow: hidden;
-        margin: 20px auto; /* Căn giữa hoặc bạn có thể đặt vào sidebar */
+        margin: 20px auto; 
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     .chat-header { background: #4a90e2; color: #fff; padding: 15px; text-align: center; font-size: 1.1rem; font-weight: bold; }
@@ -2054,7 +2053,27 @@
       });
     })();
   </script>
+<!-- Nhúng thư viện Firebase bản Core và Database từ Google CDN -->
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+
 <script>
+    // 1. Cấu hình Firebase của bạn
+    // LƯU Ý: Đoạn cấu hình dưới đây là mẫu. Để chat hoạt động ổn định và lâu dài, bạn nên tự tạo một tài khoản Firebase miễn phí và thay thế thông tin của bạn vào đây.
+    const firebaseConfig = {
+  apiKey: "AIzaSyAXUHGtTUScgDsPWbCicgWgynYWBm_nYbo",
+  authDomain: "chat-f01ef.firebaseapp.com",
+  projectId: "chat-f01ef",
+  storageBucket: "chat-f01ef.firebasestorage.app",
+  messagingSenderId: "71323026529",
+  appId: "1:71323026529:web:620fa3b36788f0b9501620",
+  measurementId: "G-MEJZ5DPFPS"
+    };
+    
+    // Khởi tạo Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
     // Tự động tạo danh sách lớp từ A1->A10 và B1->B9
     const cSelect = document.getElementById('classSelect');
     for(let i=1; i<=10; i++) cSelect.innerHTML += `<option value="A${i}">Lớp A${i}</option>`;
@@ -2073,8 +2092,13 @@
         document.getElementById('chatBox').style.display = 'flex';
         document.getElementById('inputArea').style.display = 'flex';
 
-        // Tin nhắn hệ thống chào mừng
-        addMsgIntoBox("Hệ thống", "Hệ thống", `Chào mừng [${userChatInfo.className}] ${userChatInfo.name} đã tham gia!`, 'other');
+        // LẮNG NGHE TIN NHẮN TỪ FIREBASE: Mỗi khi có bất kỳ máy nào gửi tin nhắn lên, Firebase sẽ báo về và hàm này tự động chạy trên mọi máy tính khác.
+        database.ref('messages').limitToLast(50).on('child_added', (snapshot) => {
+            const data = snapshot.val();
+            // Xác định xem đây là tin nhắn của chính mình hay của người khác gửi đến
+            const type = (data.name === userChatInfo.name && data.className === userChatInfo.className) ? 'me' : 'other';
+            addMsgIntoBox(data.name, data.className, data.text, type);
+        });
     }
 
     function addMsgIntoBox(name, className, text, type) {
@@ -2083,7 +2107,7 @@
         div.classList.add('message', type);
         div.innerHTML = `<div class="meta">[${className}] ${name}</div><div class="text">${text}</div>`;
         box.appendChild(div);
-        box.scrollTop = box.scrollHeight;
+        box.scrollTop = box.scrollHeight; // Tự động cuộn xuống dưới cùng khi có tin nhắn mới
     }
 
     function sendMessage() {
@@ -2091,8 +2115,15 @@
         const text = input.value.trim();
         if (text === "") return;
 
-        addMsgIntoBox(userChatInfo.name, userChatInfo.className, text, 'me');
-        input.value = "";
+        // Đẩy dữ liệu tin nhắn lên server đám mây Firebase thay vì chỉ hiển thị cục bộ
+        database.ref('messages').push({
+            name: userChatInfo.name,
+            className: userChatInfo.className,
+            text: text,
+            timestamp: Date.now()
+        });
+
+        input.value = ""; // Xóa chữ ô nhập để chuẩn bị nhắn câu tiếp theo
     }
 
     function checkEnter(e) { if (e.key === "Enter") sendMessage(); }
