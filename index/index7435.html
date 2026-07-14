@@ -2185,15 +2185,17 @@
 
 <script>
     // Điền đoạn cấu hình Firebase THẬT của bạn tại đây
-    const firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyAXUHGtTUScgDsPWbCicgWgynYWBm_nYbo",
   authDomain: "chat-f01ef.firebaseapp.com",
+  // BỔ SUNG DÒNG NÀY (Đường dẫn kết nối đến Realtime Database của bạn):
+  databaseURL: "https://chat-f01ef-default-rtdb.asia-southeast1.firebasedatabase.app", 
   projectId: "chat-f01ef",
   storageBucket: "chat-f01ef.firebasestorage.app",
   messagingSenderId: "71323026529",
   appId: "1:71323026529:web:620fa3b36788f0b9501620",
   measurementId: "G-MEJZ5DPFPS"
-    };
+};
     
     // Khởi tạo Firebase nếu chưa được khởi tạo trước đó
     if (!firebase.apps.length) {
