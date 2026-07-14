@@ -2403,7 +2403,6 @@ const firebaseConfig = {
     const ySelect = document.getElementById('yahooClass');
     for(let i=1; i<=10; i++) ySelect.innerHTML += `<option value="A${i}">A${i}</option>`;
     for(let i=1; i<=9; i++) ySelect.innerHTML += `<option value="B${i}">B${i}</option>`;
-}
 // LẮNG NGHE TÍN HIỆU TỪ FIREBASE
     database.ref('messages').limitToLast(50).on('child_added', (snapshot) => {
         const data = snapshot.val();
