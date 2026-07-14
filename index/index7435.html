@@ -2228,7 +2228,7 @@ const firebaseConfig = {
         div.classList.add('yahoo-msg', type);
         
         // Cấu trúc text: [Lớp] Tên: Nội dung chat
-        div.innerHTML = `<span class="sender-info">[${className}] ${name}:</span><span class="msg-text">${text}</span>`;
+        div.innerHTML = `<span class="sender-info">[${className}] ${name}:</span><span class="msg-text" style="color: #000000 !important; font-weight: normal;"> ${text}</span>`;
         
         chatBox.appendChild(div);
         chatBox.scrollTop = chatBox.scrollHeight; // Tự động cuộn xuống dòng chat mới nhất
