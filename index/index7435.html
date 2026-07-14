@@ -160,6 +160,184 @@
         padding: 1px 0 0 1px;
     }
 </style>
+  <style>
+    /* GIỮ NGUYÊN CSS CŨ VÀ THÊM CÁC ĐOẠN DƯỚI ĐÂY */
+    .yahoo-messenger {
+        width: 100%;
+        max-width: 420px;
+        height: 620px; /* Tăng chiều cao một chút để chứa thanh công cụ */
+        background-color: #d4d0c8;
+        border: 2px solid;
+        border-color: #fff #404040 #404040 #fff;
+        padding: 4px;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Tahoma', 'Segoe UI', sans-serif;
+        box-sizing: border-box;
+        margin: 20px auto;
+    }
+
+    /* Hiệu ứng rung màn hình khi bị BUZZ */
+    @keyframes yahoo-shake {
+        0% { transform: translate(2px, 1px) rotate(0deg); }
+        10% { transform: translate(-1px, -2px) rotate(-1deg); }
+        20% { transform: translate(-3px, 0px) rotate(1deg); }
+        30% { transform: translate(0px, 2px) rotate(0deg); }
+        40% { transform: translate(1px, -1px) rotate(1deg); }
+        50% { transform: translate(-1px, 2px) rotate(-1deg); }
+        60% { transform: translate(-3px, 1px) rotate(0deg); }
+        70% { transform: translate(2px, 1px) rotate(-1deg); }
+        80% { transform: translate(-1px, -1px) rotate(1deg); }
+        90% { transform: translate(2px, 2px) rotate(0deg); }
+        100% { transform: translate(1px, -2px) rotate(-1deg); }
+    }
+    .buzz-active {
+        animation: yahoo-shake 0.5s;
+        animation-iteration-count: 2; /* Rung trong 1 giây */
+    }
+
+    .yahoo-title-bar {
+        background: linear-gradient(90deg, #602080, #b080c0);
+        color: white;
+        padding: 4px 8px;
+        font-size: 12px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #404040;
+    }
+    .yahoo-title-text { display: flex; align-items: center; gap: 5px; }
+    .yahoo-window-buttons { font-size: 11px; font-weight: normal; background: #d4d0c8; color: black; border: 1px solid #404040; padding: 0 4px; cursor: pointer; }
+
+    .yahoo-menu-bar {
+        font-size: 11px;
+        padding: 4px 2px;
+        color: #000;
+        display: flex;
+        gap: 10px;
+        border-bottom: 1px solid #808080;
+    }
+    .yahoo-menu-bar span { cursor: pointer; }
+
+    .yahoo-chat-box {
+        flex: 1;
+        background: white;
+        border: 2px solid;
+        border-color: #808080 #fff #fff #808080;
+        padding: 8px;
+        overflow-y: auto;
+        margin: 4px 0;
+    }
+
+    .yahoo-msg { font-size: 12px; margin-bottom: 6px; line-height: 1.3; word-wrap: break-word; }
+    .yahoo-msg .sender-info { font-weight: bold; margin-right: 5px; }
+    .yahoo-msg.me .sender-info { color: #0000ff; }
+    .yahoo-msg.other .sender-info { color: #ff0000; }
+    .yahoo-msg.system { color: #808080; font-style: italic; }
+    .yahoo-msg.buzz-msg { color: #ff0000; font-weight: bold; font-style: italic; }
+
+    /* THANH CÔNG CỤ: BUZZ & ICON */
+    .yahoo-toolbar {
+        display: flex;
+        gap: 8px;
+        padding: 2px 4px;
+        background: #d4d0c8;
+        border-bottom: 1px solid #808080;
+        align-items: center;
+    }
+    .yahoo-tool-btn {
+        background: #d4d0c8;
+        border: 1px solid #808080;
+        font-size: 11px;
+        font-weight: bold;
+        padding: 2px 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+    }
+    .yahoo-tool-btn:hover {
+        background: #e4e0d8;
+        border-color: #fff #404040 #404040 #fff;
+    }
+    .buzz-btn {
+        color: #ff0000;
+        border: 1px solid #ff0000;
+    }
+
+    /* Khung chứa các Icon mặt cười Yahoo */
+    .yahoo-emoji-panel {
+        display: none;
+        position: absolute;
+        bottom: 110px;
+        left: 20px;
+        background: #f0f0f0;
+        border: 2px solid;
+        border-color: #fff #404040 #404040 #fff;
+        padding: 6px;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 5px;
+        z-index: 999;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    }
+    .yahoo-emoji {
+        font-size: 18px;
+        cursor: pointer;
+        text-align: center;
+        padding: 2px;
+    }
+    .yahoo-emoji:hover {
+        background: #0a246a;
+    }
+
+    /* PHẦN NHẬP LIỆU */
+    .yahoo-footer-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        background: #d4d0c8;
+        padding-top: 4px;
+        position: relative;
+    }
+    .yahoo-user-info-row { display: flex; gap: 6px; align-items: center; }
+    .yahoo-user-info-row label { font-size: 11px; font-weight: bold; color: #000; }
+    .yahoo-input-text, .yahoo-select-class {
+        font-size: 12px;
+        font-family: 'Tahoma', sans-serif;
+        padding: 3px;
+        background: white;
+        border: 2px solid;
+        border-color: #808080 #fff #fff #808080;
+        outline: none;
+    }
+    .yahoo-input-text { flex: 1; }
+    .yahoo-select-class { width: 90px; }
+
+    .yahoo-message-row { display: flex; gap: 6px; }
+    .yahoo-message-input {
+        flex: 1;
+        height: 50px;
+        font-size: 12px;
+        font-family: 'Tahoma', sans-serif;
+        padding: 4px;
+        background: white;
+        border: 2px solid;
+        border-color: #808080 #fff #fff #808080;
+        resize: none;
+        outline: none;
+    }
+    .yahoo-send-btn {
+        width: 70px;
+        background: #d4d0c8;
+        font-family: 'Tahoma', sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        border: 2px solid;
+        border-color: #fff #404040 #404040 #fff;
+        cursor: pointer;
+    }
+</style>
 </head>
 
 <body>
@@ -1640,7 +1818,7 @@
   </div>
 </div>
 <!-- KHUNG CHAT PHONG CÁCH YAHOO! MESSENGER 2000 -->
-<div class="yahoo-messenger">
+<div class="yahoo-messenger" id="yahooApp">
     <!-- Thanh tiêu đề -->
     <div class="yahoo-title-bar">
         <div class="yahoo-title-text">
@@ -1649,7 +1827,7 @@
         <button class="yahoo-window-buttons">X</button>
     </div>
 
-    <!-- Thanh Menu cổ điển -->
+    <!-- Thanh Menu -->
     <div class="yahoo-menu-bar">
         <span><u>F</u>ile</span>
         <span><u>E</u>dit</span>
@@ -1658,33 +1836,51 @@
         <span><u>H</u>elp</span>
     </div>
 
-    <!-- PHẦN HIỂN THỊ NỘI DUNG CHAT (NẰM TRÊN) -->
+    <!-- KHUNG CHAT (NẰM TRÊN) -->
     <div class="yahoo-chat-box" id="yahooChatBox">
         <div class="yahoo-msg system">*** Đang kết nối vào phòng chat Yahoo! phiên bản năm 2000...</div>
     </div>
 
-    <!-- PHẦN NHẬP LIỆU (NẰM DƯỚI) -->
+    <!-- THANH CÔNG CỤ MỚI: ICON & BUZZ -->
+    <div class="yahoo-toolbar">
+        <button class="yahoo-tool-btn" onclick="toggleEmojiPanel()">😊 Emoticons</button>
+        <button class="yahoo-tool-btn buzz-btn" onclick="sendBuzz()">⚡ BUZZ!</button>
+    </div>
+
+    <!-- KHUNG NHẬP LIỆU (NẰM DƯỚI) -->
     <div class="yahoo-footer-controls">
         
-        <!-- Nhập Tên và Chọn Lớp -->
-        <div class="yahoo-user-info-row">
-            <label for="yahooName">Nickname:</label>
-            <input type="text" id="yahooName" class="yahoo-input-text" placeholder="Nhập tên..." value="Khach_Vo_Danh">
-            
-            <label for="yahooClass">Lớp:</label>
-            <select id="yahooClass" class="yahoo-select-class">
-                <!-- Tự động tạo lớp bằng JS -->
-            </select>
+        <!-- Bảng chọn Icon ẩn/hiện -->
+        <div class="yahoo-emoji-panel" id="emojiPanel">
+            <span class="yahoo-emoji" onclick="insertEmoji('😀')">😀</span>
+            <span class="yahoo-emoji" onclick="insertEmoji('😭')">😭</span>
+            <span class="yahoo-emoji" onclick="insertEmoji('😮')">😮</span>
+            <span class="yahoo-emoji" onclick="insertEmoji('😉')">😉</span>
+            <span class="yahoo-emoji" onclick="insertEmoji('😡')">😡</span>
+            <span class="yahoo-emoji" onclick="insertEmoji('😎')">😎</span>
+            <span class="yahoo-emoji" onclick="insertEmoji('😛')">😛</span>
+            <span class="yahoo-emoji" onclick="insertEmoji('🙄')">🙄</span>
+            <span class="yahoo-emoji" onclick="insertEmoji('🤫')">🤫</span>
+            <span class="yahoo-emoji" onclick="insertEmoji('😈')">😈</span>
         </div>
 
-        <!-- Nhập nội dung chat và nút Gửi (Dưới cùng) -->
+        <div class="yahoo-user-info-row">
+            <label for="yahooName">Nickname:</label>
+            <input type="text" id="yahooName" class="yahoo-input-text" placeholder="Tên của bạn..." value="Khach_Vo_Danh">
+            
+            <label for="yahooClass">Lớp:</label>
+            <select id="yahooClass" class="yahoo-select-class"></select>
+        </div>
+
         <div class="yahoo-message-row">
-            <textarea id="yahooMessage" class="yahoo-message-input" placeholder="Nhập tin nhắn tại đây..." onkeypress="checkYahooEnter(event)"></textarea>
+            <textarea id="yahooMessage" class="yahoo-message-input" placeholder="Nhập tin nhắn..." onkeypress="checkYahooEnter(event)"></textarea>
             <button class="yahoo-send-btn" onclick="sendYahooMessage()">Send</button>
         </div>
-        
     </div>
 </div>
+
+<!-- Audio ẩn để phát tiếng Buzz -->
+<audio id="buzzAudio" src="buzz.mp3" preload="auto"></audio>
   <!-- REPRESENTATIVES -->
   <section class="rep-sec" id="representatives">
     <div class="container">
@@ -2207,62 +2403,121 @@ const firebaseConfig = {
     const ySelect = document.getElementById('yahooClass');
     for(let i=1; i<=10; i++) ySelect.innerHTML += `<option value="A${i}">A${i}</option>`;
     for(let i=1; i<=9; i++) ySelect.innerHTML += `<option value="B${i}">B${i}</option>`;
-
-    // LẮNG NGHE TIN NHẮN TỪ FIREBASE REALTIME DATABASE
-    // Hệ thống sẽ lấy tối đa 50 tin nhắn cũ nhất và tự động cập nhật ngay khi có ai đó nhắn câu mới
+}
+// LẮNG NGHE TÍN HIỆU TỪ FIREBASE
     database.ref('messages').limitToLast(50).on('child_added', (snapshot) => {
         const data = snapshot.val();
-        
-        // Lấy tên và lớp hiện tại đang điền ở ô nhập để so sánh xem là "mình" hay "người ta"
         const currentName = document.getElementById('yahooName').value.trim();
-        const currentClass = ySelect.value;
-        
+        const currentClass = ySelect ? ySelect.value : "A1";
         const isMe = (data.name === currentName && data.className === currentClass);
-        addYahooMsgRow(data.name, data.className, data.text, isMe ? 'me' : 'other');
+
+        if (data.type === "buzz") {
+            // Nếu nhận được tín hiệu BUZZ, kích hoạt rung màn hình và âm thanh
+            triggerBuzzEffect();
+            addBuzzRow(data.name, data.className);
+        } else {
+            // Tin nhắn thông thường
+            addYahooMsgRow(data.name, data.className, data.text, isMe ? 'me' : 'other');
+        }
     });
 
-    // Hàm chèn dòng tin nhắn theo phong cách text-chat của Yahoo
+    // Hàm chèn dòng tin nhắn
     function addYahooMsgRow(name, className, text, type) {
         const chatBox = document.getElementById('yahooChatBox');
+        if (!chatBox) return;
         const div = document.createElement('div');
         div.classList.add('yahoo-msg', type);
-        
-        // Cấu trúc text: [Lớp] Tên: Nội dung chat
         div.innerHTML = `<span class="sender-info">[${className}] ${name}:</span><span class="msg-text" style="color: #000000 !important; font-weight: normal;"> ${text}</span>`;
-        
         chatBox.appendChild(div);
-        chatBox.scrollTop = chatBox.scrollHeight; // Tự động cuộn xuống dòng chat mới nhất
+        chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    // Hàm gửi tin nhắn lên Server Firebase
+    // Hàm hiển thị dòng chữ thông báo BUZZ!
+    function addBuzzRow(name, className) {
+        const chatBox = document.getElementById('yahooChatBox');
+        if (!chatBox) return;
+        const div = document.createElement('div');
+        div.classList.add('yahoo-msg', 'buzz-msg');
+        div.innerHTML = `🔔 [${className}] ${name} vừa gửi một BUZZ!`;
+        chatBox.appendChild(div);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Kích hoạt hiệu ứng RUNG và ÂM THANH trên trình duyệt
+    function triggerBuzzEffect() {
+        const app = document.getElementById('yahooApp');
+        if (app) {
+            app.classList.remove('buzz-active');
+            void app.offsetWidth; // Thủ thuật ép trình duyệt tải lại CSS animation
+            app.classList.add('buzz-active');
+        }
+        // Phát tiếng buzz.mp3
+        const audio = document.getElementById('buzzAudio');
+        if (audio) {
+            audio.play().catch(e => console.log("Trình duyệt chặn tự động phát âm thanh, cần tương tác trước."));
+        }
+    }
+
+    // Hàm Gửi tín hiệu BUZZ lên Firebase
+    let lastBuzzTime = 0;
+    function sendBuzz() {
+        const now = Date.now();
+        // Giới hạn chống spam BUZZ liên tục (phải cách nhau 5 giây)
+        if (now - lastBuzzTime < 5000) {
+            alert("Bạn đang BUZZ quá nhanh! Hãy đợi một chút.");
+            return;
+        }
+        lastBuzzTime = now;
+
+        const nameInput = document.getElementById('yahooName').value.trim();
+        const classInput = document.getElementById('yahooClass').value;
+
+        database.ref('messages').push({
+            name: nameInput,
+            className: classInput,
+            type: "buzz",
+            timestamp: Date.now()
+        });
+    }
+
+    // Hàm gửi tin nhắn thông thường
     function sendYahooMessage() {
         const nameInput = document.getElementById('yahooName').value.trim();
         const classInput = document.getElementById('yahooClass').value;
         const msgInput = document.getElementById('yahooMessage');
         const text = msgInput.value.trim();
 
-        if (nameInput === "") {
-            alert("Bạn vui lòng điền Nickname trước khi chat nhé!");
-            return;
-        }
+        if (nameInput === "") { alert("Vui lòng điền Nickname!"); return; }
         if (text === "") return;
 
-        // Đẩy thẳng lên Firebase để các máy tính khác cùng nhận được nhận
         database.ref('messages').push({
             name: nameInput,
             className: classInput,
             text: text,
+            type: "text",
             timestamp: Date.now()
         });
 
-        msgInput.value = ""; // Xóa nội dung ô nhập sau khi gửi thành công
+        msgInput.value = "";
+        msgInput.focus();
+        document.getElementById('emojiPanel').style.display = 'none'; // Ẩn bảng icon sau khi gửi
+    }
+
+    // Các hàm xử lý bảng Emoji
+    function toggleEmojiPanel() {
+        const panel = document.getElementById('emojiPanel');
+        panel.style.display = (panel.style.display === 'grid') ? 'none' : 'grid';
+    }
+
+    function insertEmoji(emoji) {
+        const msgInput = document.getElementById('yahooMessage');
+        msgInput.value += emoji;
         msgInput.focus();
     }
 
-    // Xử lý phím tắt nhấn Enter để gửi tin nhắn nhanh (giữ Shift + Enter nếu muốn xuống dòng)
     function checkYahooEnter(e) {
         if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault(); // Tránh việc ô nhập bị nhảy xuống dòng trống
+            e.preventDefault();
             sendYahooMessage();
         }
     }
