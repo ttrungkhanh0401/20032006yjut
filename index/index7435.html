@@ -29,35 +29,136 @@
   <script type="module">import'data:text/javascript,if(!import.meta.resolve)throw Error("import.meta.resolve not supported")';import.meta.url;import("_").catch(()=>1);(async function*(){})().next();window.__vite_is_modern_browser=true</script>
   <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
 <style>
-    .chat-container { 
-        width: 100%; 
-        max-width: 400px; 
-        height: 550px; 
-        background: #ffffff; 
-        border-radius: 12px; 
-        box-shadow: 0 5px 25px rgba(0,0,0,0.15); 
-        display: flex; 
-        flex-direction: column; 
-        overflow: hidden;
-        margin: 20px auto; 
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Giao diện mang phong cách Yahoo! Messenger 2000 */
+    .yahoo-messenger {
+        width: 100%;
+        max-width: 420px;
+        height: 580px;
+        background-color: #d4d0c8; /* Màu nền xám cổ điển của Windows 2000 */
+        border: 2px solid;
+        border-color: #fff #404040 #404040 #fff; /* Viền nổi khối 3D */
+        padding: 4px;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Tahoma', 'Segoe UI', sans-serif;
+        box-sizing: border-box;
+        margin: 20px auto;
     }
-    .chat-header { background: #4a90e2; color: #fff; padding: 15px; text-align: center; font-size: 1.1rem; font-weight: bold; }
-    .login-screen { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; padding: 25px; gap: 15px; }
-    .login-screen h3 { color: #333; font-size: 1rem; margin-bottom: 5px; }
-    .login-screen input, .login-screen select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; outline: none; }
-    .login-screen button { width: 100%; padding: 10px; background: #4a90e2; color: white; border: none; border-radius: 6px; font-size: 0.95rem; cursor: pointer; font-weight: bold; }
-    .login-screen button:hover { background: #357abd; }
-    .chat-box { flex: 1; padding: 15px; overflow-y: auto; background: #f9f9f9; display: none; flex-direction: column; gap: 10px; }
-    .message { max-width: 80%; padding: 8px 12px; border-radius: 8px; word-wrap: break-word; display: flex; flex-direction: column; }
-    .message .meta { font-size: 0.7rem; font-weight: bold; color: #666; margin-bottom: 2px; }
-    .message .text { font-size: 0.9rem; line-height: 1.4; color: #333; }
-    .message.other { background: #e2e8f0; align-self: flex-start; }
-    .message.me { background: #d2e3fc; align-self: flex-end; }
-    .message.me .meta { color: #1a73e8; text-align: right; }
-    .input-area { padding: 10px; background: #fff; border-top: 1px solid #ddd; display: none; gap: 10px; }
-    .input-area input { flex: 1; padding: 10px 15px; border: 1px solid #ddd; border-radius: 20px; outline: none; font-size: 0.9rem; }
-    .input-area button { padding: 0 15px; background: #4a90e2; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
+
+    /* Thanh tiêu đề màu tím đặc trưng của Yahoo */
+    .yahoo-title-bar {
+        background: linear-gradient(90deg, #602080, #b080c0);
+        color: white;
+        padding: 4px 8px;
+        font-size: 12px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #404040;
+    }
+    .yahoo-title-text { display: flex; align-items: center; gap: 5px; }
+    .yahoo-window-buttons { font-size: 11px; font-weight: normal; background: #d4d0c8; color: black; border: 1px solid #404040; padding: 0 4px; cursor: pointer; }
+
+    /* Thanh Menu (File, Edit, Contact...) */
+    .yahoo-menu-bar {
+        font-size: 11px;
+        padding: 4px 2px;
+        color: #000;
+        display: flex;
+        gap: 10px;
+        border-bottom: 1px solid #808080;
+    }
+    .yahoo-menu-bar span { cursor: pointer; }
+    .yahoo-menu-bar span:hover { background-color: #0a246a; color: white; }
+
+    /* VÙNG CHÍNH: HIỂN THỊ NỘI DUNG CHAT (NẰM TRÊN) */
+    .yahoo-chat-box {
+        flex: 1;
+        background: white;
+        border: 2px solid;
+        border-color: #808080 #fff #fff #808080; /* Viền chìm xuống */
+        padding: 8px;
+        overflow-y: auto;
+        margin: 4px 0;
+    }
+
+    /* Định dạng tin nhắn chuẩn Yahoo: Tên màu xanh/đỏ, nội dung mặc định chữ đen/xanh */
+    .yahoo-msg {
+        font-size: 12px;
+        margin-bottom: 6px;
+        line-height: 1.3;
+        word-wrap: break-word;
+    }
+    .yahoo-msg .sender-info {
+        font-weight: bold;
+        margin-right: 5px;
+    }
+    /* Đổi màu tên luân phiên giống phòng chat ngày xưa */
+    .yahoo-msg.me .sender-info { color: #0000ff; } /* Mình nói chữ xanh dương */
+    .yahoo-msg.other .sender-info { color: #ff0000; } /* Người khác nói chữ đỏ */
+    .yahoo-msg.system { color: #808080; font-style: italic; }
+
+    /* VÙNG NHẬP LIỆU (NẰM DƯỚI KHUNG CHAT) */
+    .yahoo-footer-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        background: #d4d0c8;
+        padding-top: 4px;
+    }
+
+    /* Hàng chứa thông tin cá nhân: Tên và Lớp */
+    .yahoo-user-info-row {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+    }
+    .yahoo-user-info-row label { font-size: 11px; font-weight: bold; color: #000; }
+    .yahoo-input-text, .yahoo-select-class {
+        font-size: 12px;
+        font-family: 'Tahoma', sans-serif;
+        padding: 3px;
+        background: white;
+        border: 2px solid;
+        border-color: #808080 #fff #fff #808080;
+        outline: none;
+    }
+    .yahoo-input-text { flex: 1; }
+    .yahoo-select-class { width: 90px; }
+
+    /* Hàng nhập nội dung chat và nút Gửi (Dưới cùng) */
+    .yahoo-message-row {
+        display: flex;
+        gap: 6px;
+    }
+    .yahoo-message-input {
+        flex: 1;
+        height: 50px;
+        font-size: 12px;
+        font-family: 'Tahoma', sans-serif;
+        padding: 4px;
+        background: white;
+        border: 2px solid;
+        border-color: #808080 #fff #fff #808080;
+        resize: none;
+        outline: none;
+    }
+    .yahoo-send-btn {
+        width: 70px;
+        background: #d4d0c8;
+        font-family: 'Tahoma', sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        border: 2px solid;
+        border-color: #fff #404040 #404040 #fff;
+        cursor: pointer;
+        outline: none;
+    }
+    .yahoo-send-btn:active {
+        border-color: #404040 #fff #fff #404040;
+        padding: 1px 0 0 1px;
+    }
 </style>
 </head>
 
@@ -1538,25 +1639,50 @@
 
   </div>
 </div>
-<!-- KHUNG CHAT HỌC SINH -->
-<div class="chat-container">
-    <div class="chat-header">Phòng Chat Học Sinh</div>
-
-    <!-- Giao diện Nhập tên & lớp -->
-    <div class="login-screen" id="loginScreen">
-        <h3>Nhập thông tin để trò chuyện</h3>
-        <input type="text" id="usernameInput" placeholder="Tên của bạn..." required>
-        <select id="classSelect"></select>
-        <button onclick="joinChat()">Vào Phòng Chat</button>
+<!-- KHUNG CHAT PHONG CÁCH YAHOO! MESSENGER 2000 -->
+<div class="yahoo-messenger">
+    <!-- Thanh tiêu đề -->
+    <div class="yahoo-title-bar">
+        <div class="yahoo-title-text">
+            <span>🟣</span> Yahoo! Chat Room
+        </div>
+        <button class="yahoo-window-buttons">X</button>
     </div>
 
-    <!-- Vùng chứa tin nhắn -->
-    <div class="chat-box" id="chatBox"></div>
+    <!-- Thanh Menu cổ điển -->
+    <div class="yahoo-menu-bar">
+        <span><u>F</u>ile</span>
+        <span><u>E</u>dit</span>
+        <span><u>V</u>iew</span>
+        <span><u>T</u>ools</span>
+        <span><u>H</u>elp</span>
+    </div>
 
-    <!-- Ô nhập chữ để gửi -->
-    <div class="input-area" id="inputArea">
-        <input type="text" id="messageInput" placeholder="Nhập nội dung..." onkeypress="checkEnter(event)">
-        <button onclick="sendMessage()">Gửi</button>
+    <!-- PHẦN HIỂN THỊ NỘI DUNG CHAT (NẰM TRÊN) -->
+    <div class="yahoo-chat-box" id="yahooChatBox">
+        <div class="yahoo-msg system">*** Đang kết nối vào phòng chat Yahoo! phiên bản năm 2000...</div>
+    </div>
+
+    <!-- PHẦN NHẬP LIỆU (NẰM DƯỚI) -->
+    <div class="yahoo-footer-controls">
+        
+        <!-- Nhập Tên và Chọn Lớp -->
+        <div class="yahoo-user-info-row">
+            <label for="yahooName">Nickname:</label>
+            <input type="text" id="yahooName" class="yahoo-input-text" placeholder="Nhập tên..." value="Khach_Vo_Danh">
+            
+            <label for="yahooClass">Lớp:</label>
+            <select id="yahooClass" class="yahoo-select-class">
+                <!-- Tự động tạo lớp bằng JS -->
+            </select>
+        </div>
+
+        <!-- Nhập nội dung chat và nút Gửi (Dưới cùng) -->
+        <div class="yahoo-message-row">
+            <textarea id="yahooMessage" class="yahoo-message-input" placeholder="Nhập tin nhắn tại đây..." onkeypress="checkYahooEnter(event)"></textarea>
+            <button class="yahoo-send-btn" onclick="sendYahooMessage()">Send</button>
+        </div>
+        
     </div>
 </div>
   <!-- REPRESENTATIVES -->
@@ -2053,13 +2179,12 @@
       });
     })();
   </script>
-<!-- Nhúng thư viện Firebase bản Core và Database từ Google CDN -->
+<!-- Nhúng thư viện Firebase bản Core và Database từ Google CDN nếu chưa có trên Web -->
 <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
 
 <script>
-    // 1. Cấu hình Firebase của bạn
-    // LƯU Ý: Đoạn cấu hình dưới đây là mẫu. Để chat hoạt động ổn định và lâu dài, bạn nên tự tạo một tài khoản Firebase miễn phí và thay thế thông tin của bạn vào đây.
+    // Điền đoạn cấu hình Firebase THẬT của bạn tại đây
     const firebaseConfig = {
   apiKey: "AIzaSyAXUHGtTUScgDsPWbCicgWgynYWBm_nYbo",
   authDomain: "chat-f01ef.firebaseapp.com",
@@ -2070,63 +2195,75 @@
   measurementId: "G-MEJZ5DPFPS"
     };
     
-    // Khởi tạo Firebase
-    firebase.initializeApp(firebaseConfig);
+    // Khởi tạo Firebase nếu chưa được khởi tạo trước đó
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
     const database = firebase.database();
 
-    // Tự động tạo danh sách lớp từ A1->A10 và B1->B9
-    const cSelect = document.getElementById('classSelect');
-    for(let i=1; i<=10; i++) cSelect.innerHTML += `<option value="A${i}">Lớp A${i}</option>`;
-    for(let i=1; i<=9; i++) cSelect.innerHTML += `<option value="B${i}">Lớp B${i}</option>`;
+    // Tự động tạo danh sách lớp từ A1->A10 và B1->B9 điền vào thẻ Select
+    const ySelect = document.getElementById('yahooClass');
+    for(let i=1; i<=10; i++) ySelect.innerHTML += `<option value="A${i}">A${i}</option>`;
+    for(let i=1; i<=9; i++) ySelect.innerHTML += `<option value="B${i}">B${i}</option>`;
 
-    let userChatInfo = { name: "", className: "" };
-
-    function joinChat() {
-        const name = document.getElementById('usernameInput').value.trim();
-        if (name === "") { alert("Bạn chưa nhập tên kìa!"); return; }
+    // LẮNG NGHE TIN NHẮN TỪ FIREBASE REALTIME DATABASE
+    // Hệ thống sẽ lấy tối đa 50 tin nhắn cũ nhất và tự động cập nhật ngay khi có ai đó nhắn câu mới
+    database.ref('messages').limitToLast(50).on('child_added', (snapshot) => {
+        const data = snapshot.val();
         
-        userChatInfo.name = name;
-        userChatInfo.className = cSelect.value;
+        // Lấy tên và lớp hiện tại đang điền ở ô nhập để so sánh xem là "mình" hay "người ta"
+        const currentName = document.getElementById('yahooName').value.trim();
+        const currentClass = ySelect.value;
+        
+        const isMe = (data.name === currentName && data.className === currentClass);
+        addYahooMsgRow(data.name, data.className, data.text, isMe ? 'me' : 'other');
+    });
 
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('chatBox').style.display = 'flex';
-        document.getElementById('inputArea').style.display = 'flex';
-
-        // LẮNG NGHE TIN NHẮN TỪ FIREBASE: Mỗi khi có bất kỳ máy nào gửi tin nhắn lên, Firebase sẽ báo về và hàm này tự động chạy trên mọi máy tính khác.
-        database.ref('messages').limitToLast(50).on('child_added', (snapshot) => {
-            const data = snapshot.val();
-            // Xác định xem đây là tin nhắn của chính mình hay của người khác gửi đến
-            const type = (data.name === userChatInfo.name && data.className === userChatInfo.className) ? 'me' : 'other';
-            addMsgIntoBox(data.name, data.className, data.text, type);
-        });
-    }
-
-    function addMsgIntoBox(name, className, text, type) {
-        const box = document.getElementById('chatBox');
+    // Hàm chèn dòng tin nhắn theo phong cách text-chat của Yahoo
+    function addYahooMsgRow(name, className, text, type) {
+        const chatBox = document.getElementById('yahooChatBox');
         const div = document.createElement('div');
-        div.classList.add('message', type);
-        div.innerHTML = `<div class="meta">[${className}] ${name}</div><div class="text">${text}</div>`;
-        box.appendChild(div);
-        box.scrollTop = box.scrollHeight; // Tự động cuộn xuống dưới cùng khi có tin nhắn mới
+        div.classList.add('yahoo-msg', type);
+        
+        // Cấu trúc text: [Lớp] Tên: Nội dung chat
+        div.innerHTML = `<span class="sender-info">[${className}] ${name}:</span><span class="msg-text">${text}</span>`;
+        
+        chatBox.appendChild(div);
+        chatBox.scrollTop = chatBox.scrollHeight; // Tự động cuộn xuống dòng chat mới nhất
     }
 
-    function sendMessage() {
-        const input = document.getElementById('messageInput');
-        const text = input.value.trim();
+    // Hàm gửi tin nhắn lên Server Firebase
+    function sendYahooMessage() {
+        const nameInput = document.getElementById('yahooName').value.trim();
+        const classInput = document.getElementById('yahooClass').value;
+        const msgInput = document.getElementById('yahooMessage');
+        const text = msgInput.value.trim();
+
+        if (nameInput === "") {
+            alert("Bạn vui lòng điền Nickname trước khi chat nhé!");
+            return;
+        }
         if (text === "") return;
 
-        // Đẩy dữ liệu tin nhắn lên server đám mây Firebase thay vì chỉ hiển thị cục bộ
+        // Đẩy thẳng lên Firebase để các máy tính khác cùng nhận được nhận
         database.ref('messages').push({
-            name: userChatInfo.name,
-            className: userChatInfo.className,
+            name: nameInput,
+            className: classInput,
             text: text,
             timestamp: Date.now()
         });
 
-        input.value = ""; // Xóa chữ ô nhập để chuẩn bị nhắn câu tiếp theo
+        msgInput.value = ""; // Xóa nội dung ô nhập sau khi gửi thành công
+        msgInput.focus();
     }
 
-    function checkEnter(e) { if (e.key === "Enter") sendMessage(); }
+    // Xử lý phím tắt nhấn Enter để gửi tin nhắn nhanh (giữ Shift + Enter nếu muốn xuống dòng)
+    function checkYahooEnter(e) {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault(); // Tránh việc ô nhập bị nhảy xuống dòng trống
+            sendYahooMessage();
+        }
+    }
 </script>
 </body>
 
